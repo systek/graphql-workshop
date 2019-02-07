@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "gql4w",
+  "alias": "gql4w.karl.run",
+  "builds": [
+    { "src": "index.html", "use": "@now/static" },
+    { "src": "style.css", "use": "@now/static" },
+    { "src": "script.js", "use": "@now/static" },
+    { "src": "example.png", "use": "@now/static" }
+  ]
+}
