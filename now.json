@@ -5,6 +5,12 @@
   "builds": [
     { "src": "index.html", "use": "@now/html-minifier" },
     { "src": "style.css", "use": "@now/html-minifier" },
-    { "src": "static/*", "use": "@now/static" }
-  ]
+    { "src": "static/*", "use": "@now/static" },
+    { "src": "sheeter.js", "use": "@now/node" }
+  ],
+  "routes": [{ "src": "/api/ans", "dest": "sheeter.js" }],
+  "env": {
+    "IS_NOW": "true",
+    "MONGO_PASSWORD": "@benderql-mongo-password"
+  }
 }

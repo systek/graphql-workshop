@@ -1,0 +1,1 @@
+curl --request POST 'https://sheets.googleapis.com/v4/spreadsheets/1c6r0lUAYQlOI440xt0T1rAe9GMtWbpsnBoBKxL1xwEI/values/A1%3AB1:append?valueInputOption=USER_ENTERED&key=AIzaSyBCNHwNNeXSzSEhnmpQY-2i501RrBzRl9Y' --header 'Accept: application/json' --header 'Content-Type: application/json' --data '{"values":[["YA","BOI"]]}' --compressed

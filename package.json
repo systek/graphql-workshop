@@ -1,0 +1,12 @@
+{
+  "name": "gql4w",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:karl-run/gql4w.git",
+  "author": "Karl J. Overå <k@rl.run>",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^5.4.10",
+    "node-fetch": "^2.3.0"
+  }
+}

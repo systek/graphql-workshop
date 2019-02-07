@@ -82,22 +82,22 @@ body {
 
 @keyframes subtitle-changer {
   0% {
-    content: " ";
+    content: ' ';
   }
   7% {
-    content: "Du må lage et GraphQL API, hva velger du?";
+    content: 'Du må lage et GraphQL API, hva velger du?';
   }
   44% {
-    content: " ";
+    content: ' ';
   }
   57% {
-    content: "Nå, hva blir det til?";
+    content: 'Nå, hva blir det til?';
   }
   80% {
-    content: " ";
+    content: ' ';
   }
   90% {
-    content: "Kom igjen...";
+    content: 'Kom igjen...';
   }
 }
 
@@ -117,7 +117,7 @@ body {
 }
 
 #subtitle::before {
-  content: " ";
+  content: ' ';
   animation: subtitle-changer 32s steps(6) infinite;
 }
 
@@ -189,6 +189,7 @@ body {
   flex: 1 1 16%;
   cursor: pointer;
   animation: options-mount 3s ease-out;
+  outline: none;
 }
 
 #decider-wrapper .option:hover {
@@ -235,12 +236,16 @@ body {
   opacity: 1;
 }
 
+#decider-wrapper .option:focus .underline {
+  opacity: 1;
+}
+
 .loading-spinner {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 101%;
+  width: 101%;
   background-color: black;
   display: flex;
   justify-content: center;
@@ -251,6 +256,18 @@ body {
 
 .loading-spinner.loading-false {
   opacity: 0;
+}
+
+.loading-spinner.done-false > .glitch {
+  display: none;
+}
+
+.loading-spinner.done-true {
+  opacity: 1;
+}
+
+.loading-spinner.done-true .spinner-ripple {
+  display: none;
 }
 
 @keyframes spinner-ripple {
@@ -285,4 +302,40 @@ body {
 }
 .spinner-ripple div:nth-child(2) {
   animation-delay: -0.5s;
+}
+
+.glitch {
+  color: white;
+  font-size: 100px;
+  position: relative;
+  width: 400px;
+  margin: 0 auto;
+  animation: shake 1s linear 1.35s;
+}
+
+.glitch::after {
+  content: 'Vi møtes.';
+  color: white;
+  font-size: 18px;
+}
+
+@keyframes shake {
+  0% {
+    transform: skewX(-15deg);
+  }
+  5% {
+    transform: skewX(15deg);
+  }
+  10% {
+    transform: skewX(-15deg);
+  }
+  15% {
+    transform: skewX(15deg);
+  }
+  20% {
+    transform: skewX(0deg);
+  }
+  100% {
+    transform: skewX(0deg);
+  }
 }
