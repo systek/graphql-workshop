@@ -5,10 +5,6 @@ import {
 } from "https://unpkg.com/htm/preact/standalone.mjs";
 
 class App extends Component {
-  addTodo() {
-    const { todos = [] } = this.state;
-    this.setState({ todos: todos.concat(`Item ${todos.length}`) });
-  }
   render() {
     return html`
       <div class="app"><${BanderContainer} /></div>
@@ -20,10 +16,18 @@ const options = ["Node", "Java", "Kotlin", ".NET Core"];
 
 const Option = ({ name, style }) =>
   html`
-    <div class="option" style=${style}>
+    <button
+      class="option"
+      style=${style}
+      onClick=${
+        () => {
+          alert(`${name} is a good choice. :) // TODO`);
+        }
+      }
+    >
       <div class="text">${name}</div>
       <div class="underline" />
-    </div>
+    </button>
   `;
 
 const Subtitle = ({ name }) =>
@@ -34,6 +38,7 @@ const Subtitle = ({ name }) =>
 const Decider = () =>
   html`
     <div id="decider-wrapper">
+      <${WaitingBar} />
       ${
         options.map(
           (option, i) =>
@@ -46,6 +51,11 @@ const Decider = () =>
         )
       }
     </div>
+  `;
+
+const WaitingBar = () =>
+  html`
+    <div class="waiting-bar" />
   `;
 
 class BanderContainer extends Component {
