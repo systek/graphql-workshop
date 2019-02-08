@@ -4,7 +4,7 @@
   "alias": "gql4w.karl.run",
   "builds": [
     { "src": "index.html", "use": "@now/html-minifier" },
-    { "src": "style.css", "use": "@now/html-minifier" },
+    { "src": "static/style.css", "use": "@now/html-minifier" },
     { "src": "static/*", "use": "@now/static" },
     { "src": "sheeter.js", "use": "@now/node" }
   ],
