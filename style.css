@@ -11,7 +11,8 @@ body {
 
 .app {
   height: 100vh;
-  width: 100wv;
+  width: 100vw;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +35,7 @@ body {
 
   #image-box video {
     width: 100vw;
-    height: calc(100vw * 0.5625);
+    height: calc(100vw * 0.5644);
   }
 
   #subtitle {
@@ -62,8 +63,7 @@ body {
   }
 
   #image-box video {
-    height: 100vh;
-    width: calc(100vh / 0.5625);
+    width: calc(100vh / 0.5644);
   }
 
   #subtitle {
@@ -84,11 +84,17 @@ body {
   0% {
     content: " ";
   }
-  25% {
+  7% {
     content: "Du må lage et GraphQL API, hva velger du?";
+  }
+  44% {
+    content: " ";
   }
   57% {
     content: "Nå, hva blir det til?";
+  }
+  80% {
+    content: " ";
   }
   90% {
     content: "Kom igjen...";
@@ -151,7 +157,7 @@ body {
   opacity: 0;
   position: absolute;
   top: 0;
-  animation: waiting-bar-animation 30s linear;
+  animation: waiting-bar-animation 30s linear infinite;
 }
 
 #decider-wrapper {
@@ -231,13 +237,52 @@ body {
 
 .loading-spinner {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 10vh;
-  width: 30vw;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2.3vw;
-  transform: translate(-50%, 50%);
+  transition: opacity 700ms ease-in-out;
+}
+
+.loading-spinner.loading-false {
+  opacity: 0;
+}
+
+@keyframes spinner-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
+
+.spinner-ripple {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.spinner-ripple div {
+  position: absolute;
+  border: 4px solid #e50914;
+  opacity: 1;
+  border-radius: 50%;
+  animation: spinner-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.spinner-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
 }

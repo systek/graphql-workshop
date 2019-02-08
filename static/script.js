@@ -62,9 +62,34 @@ class BanderContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.mountPoint = Date.now();
+
     this.state = {
-      loading: true
+      loading: true,
+      showInteraction: false
     };
+
+    this.initiateInteraction = this.initiateInteraction.bind(this);
+    this.handleOnPlayThroughDone = this.handleOnPlayThroughDone.bind(this);
+  }
+
+  initiateInteraction() {
+    setTimeout(() => {
+      this.setState({ showInteraction: true });
+    }, 2000);
+  }
+
+  handleOnPlayThroughDone() {
+    const timeDiff = Date.now() - this.mountPoint;
+    if (timeDiff < 3000) {
+      setTimeout(() => {
+        this.setState({ loading: false });
+        this.initiateInteraction();
+      }, 3000 - timeDiff);
+    } else {
+      this.setState({ loading: false });
+      this.initiateInteraction();
+    }
   }
 
   render() {
@@ -74,20 +99,20 @@ class BanderContainer extends Component {
           autoplay
           loop
           muted
-          oncanplaythrough=${
-            () => {
-              this.setState({ loading: false });
-            }
-          }
+          oncanplaythrough=${this.handleOnPlayThroughDone}
         >
           <source src="./static/clip.mp4" type="video/mp4" />
         </video>
-        ${
-          this.state.loading &&
-            html`
-              <div class="loading-spinner subtitle-esque-text">Loading...</div>
-            `
-        }
+        <div
+          class=${
+            `loading-spinner subtitle-esque-text loading-${this.state.loading}`
+          }
+        >
+          <div class="spinner-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
         ${
           !this.state.loading &&
             html`
@@ -96,6 +121,7 @@ class BanderContainer extends Component {
         }
         ${
           !this.state.loading &&
+            this.state.showInteraction &&
             html`
               <${Decider} />
             `
