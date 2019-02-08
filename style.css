@@ -118,7 +118,7 @@ body {
 
 #subtitle::before {
   content: " ";
-  animation: subtitle-changer 30s steps(4) infinite;
+  animation: subtitle-changer 32s steps(6) infinite;
 }
 
 @keyframes options-mount {
