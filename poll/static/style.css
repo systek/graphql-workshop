@@ -359,12 +359,6 @@ body {
   animation: shake 1s linear 1.35s;
 }
 
-.glitch::after {
-  content: 'Vi møtes.';
-  color: white;
-  font-size: 18px;
-}
-
 @keyframes shake {
   0% {
     transform: skewX(-15deg);

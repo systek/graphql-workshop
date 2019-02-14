@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "gql4w",
-  "alias": "gql4w.karl.run",
+  "alias": "bander.karl.run",
   "builds": [
     { "src": "index.html", "use": "@now/html-minifier" },
     { "src": "static/style.css", "use": "@now/html-minifier" },
