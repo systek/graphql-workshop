@@ -1,0 +1,17 @@
+{
+  "name": "graphql_workshop_starter_node",
+  "version": "1.0.0",
+  "author": "Karl J. Overå",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.4.8",
+    "graphql": "^14.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
