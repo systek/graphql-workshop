@@ -19,16 +19,20 @@ const typeDefs = gql`
   type Person {
     name: String
     title: String
+    description: String
   }
 
   type Query {
     developers: [Person]
   }
 `;
-
+ 
 const resolvers = {
   Query: {
     developers: () => exampleData
+  },
+  Person: {
+    description: (person) => `${person.name}, ${person.title}`
   }
 };
 
