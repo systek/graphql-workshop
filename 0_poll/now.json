@@ -6,11 +6,15 @@
     { "src": "index.html", "use": "@now/html-minifier" },
     { "src": "static/style.css", "use": "@now/html-minifier" },
     { "src": "static/*", "use": "@now/static" },
-    { "src": "sheeter.js", "use": "@now/node" }
+    { "src": "sheeter.js", "use": "@now/node" },
+    { "src": "stats.js", "use": "@now/node" }
   ],
-  "routes": [{ "src": "/api/ans", "dest": "sheeter.js" }],
+  "routes": [
+    { "src": "/api/ans", "dest": "sheeter.js" },
+    { "src": "/api/stats", "dest": "stats.js" }
+  ],
   "env": {
     "IS_NOW": "true",
-    "MONGO_PASSWORD": "@benderql-mongo-password"
+    "MONGO_PASSWORD": "@banderql-mongo-password"
   }
 }

@@ -6,7 +6,8 @@
   "author": "Karl J. Overå <k@rl.run>",
   "license": "MIT",
   "dependencies": {
-    "mongoose": "^5.4.10",
+    "lodash.groupby": "^4.6.0",
+    "mongoose": "^5.4.19",
     "node-fetch": "^2.3.0"
   }
 }

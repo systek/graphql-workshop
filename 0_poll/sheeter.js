@@ -1,16 +1,16 @@
 const { createServer } = require('http')
 const url = require('url')
 const mongoose = require('mongoose')
+const { ResponseModel } = require('./lib/mongo')
 
 const CONNECTION_STRING = `mongodb+srv://app_user:${
   process.env.MONGO_PASSWORD
 }@questionnaire-gylae.mongodb.net/banderql?retryWrites=true`
 
 mongoose
-  .connect(
-    CONNECTION_STRING,
-    { useNewUrlParser: true },
-  )
+  .connect(CONNECTION_STRING, {
+    useNewUrlParser: true,
+  })
   .then(() => {
     console.info('Connected to Mongo')
   })
@@ -36,14 +36,6 @@ const getCookieId = req => {
   return req.headers['x-uuid'] || 'None'
 }
 
-const ResponseModel = mongoose.model('Response', {
-  ip: String,
-  response: String,
-  userAgent: String,
-  referer: String,
-  uuid: String,
-})
-
 module.exports = async (req, res) => {
   const value = getResponse(req)
   if (!value) {
@@ -56,11 +48,18 @@ module.exports = async (req, res) => {
     ip: getIpAdress(req),
     response: value,
     uuid: getCookieId(req),
+    timestamp: new Date().toISOString(),
     userAgent: req.headers['user-agent'],
     referer: req.headers['referer'] || 'None',
   })
 
   await response.save()
+
+  console.info(
+    `Successfully saved response with uuid ${response.uuid} at ${
+      response.timestamp
+    }`,
+  )
 
   res.end(JSON.stringify({ message: 'Thanks' }))
 }

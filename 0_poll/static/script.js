@@ -56,7 +56,7 @@ const GraphQLLogo = props =>
         fill="currentColor"
         d="M369.5 297.9c-9.6 16.7-31 22.4-47.7 12.8-16.7-9.6-22.4-31-12.8-47.7 9.6-16.7 31-22.4 47.7-12.8a34.8 34.8 0 0 1 12.8 47.7M90.9 137c-9.6 16.7-31 22.4-47.7 12.8-16.7-9.6-22.4-31-12.8-47.7 9.6-16.7 31-22.4 47.7-12.8 16.7 9.7 22.4 31 12.8 47.7M30.5 297.9c-9.6-16.7-3.9-38 12.8-47.7 16.7-9.6 38-3.9 47.7 12.8 9.6 16.7 3.9 38-12.8 47.7a34.93 34.93 0 0 1-47.7-12.8M309.1 137c-9.6-16.7-3.9-38 12.8-47.7 16.7-9.6 38-3.9 47.7 12.8 9.6 16.7 3.9 38-12.8 47.7a34.95 34.95 0 0 1-47.7-12.8M200 395.8c-19.3 0-34.9-15.6-34.9-34.9 0-19.3 15.6-34.9 34.9-34.9 19.3 0 34.9 15.6 34.9 34.9 0 19.2-15.6 34.9-34.9 34.9M200 74c-19.3 0-34.9-15.6-34.9-34.9 0-19.3 15.6-34.9 34.9-34.9 19.3 0 34.9 15.6 34.9 34.9 0 19.3-15.6 34.9-34.9 34.9"
       />
-      <text x="-10" y="500" fill="white">Vi møtes.</text>
+      <text x="-210" y="500" fill="white">Vi møtes 10. april.</text>
     </svg>
   `
 
@@ -66,21 +66,19 @@ const Option = ({ name, style, onResponseDone }) =>
     <button
       class="option"
       style=${style}
-      onClick=${
-        () => {
-          postResponse(name)
-            .then(response => {
-              if (response.status === 200) {
-                onResponseDone()
-              } else {
-                console.error(response)
-              }
-            })
-            .catch(e => {
-              console.error(e)
-            })
-        }
-      }
+      onClick=${() => {
+        postResponse(name)
+          .then(response => {
+            if (response.status === 200) {
+              onResponseDone()
+            } else {
+              console.error(response)
+            }
+          })
+          .catch(e => {
+            console.error(e)
+          })
+      }}
     >
       <div class="text">${name}</div>
       <div class="underline" />
@@ -96,18 +94,16 @@ const Decider = ({ onResponseDone }) =>
   html`
     <div id="decider-wrapper">
       <${WaitingBar} />
-      ${
-        options.map(
-          (option, i) =>
-            html`
-              <${Option}
-                name="${option}"
-                style=${{ animationDuration: `${3 + i / 2}s` }}
-                onResponseDone=${onResponseDone}
-              />
-            `,
-        )
-      }
+      ${options.map(
+        (option, i) =>
+          html`
+            <${Option}
+              name="${option}"
+              style=${{ animationDuration: `${3 + i / 2}s` }}
+              onResponseDone=${onResponseDone}
+            />
+          `,
+      )}
     </div>
   `
 
@@ -171,11 +167,9 @@ class BanderContainer extends Component {
           <source src="./static/clip.mp4" type="video/mp4" />
         </video>
         <div
-          class=${
-            `loading-spinner subtitle-esque-text loading-${
-              this.state.loading
-            } done-${this.state.responseComplete}`
-          }
+          class=${`loading-spinner subtitle-esque-text loading-${
+            this.state.loading
+          } done-${this.state.responseComplete}`}
         >
           <${GraphQLLogo} class="glitch" />
           <div class="spinner-ripple">
@@ -183,21 +177,17 @@ class BanderContainer extends Component {
             <div></div>
           </div>
         </div>
-        ${
-          !this.state.loading &&
-            !this.state.responseComplete &&
-            html`
-              <${Subtitle} />
-            `
-        }
-        ${
-          !this.state.loading &&
-            this.state.showInteraction &&
-            !this.state.responseComplete &&
-            html`
-              <${Decider} onResponseDone=${this.handleOnResponseDone} />
-            `
-        }
+        ${!this.state.loading &&
+          !this.state.responseComplete &&
+          html`
+            <${Subtitle} />
+          `}
+        ${!this.state.loading &&
+          this.state.showInteraction &&
+          !this.state.responseComplete &&
+          html`
+            <${Decider} onResponseDone=${this.handleOnResponseDone} />
+          `}
       </div>
     `
   }
