@@ -10,5 +10,5 @@ This starter uses:
 
 - [application.yml](/1_starter/java//src/main/resources/application.yml)
   - coniguration of graphql servlet and graphiql console
-- [schema.graphqls](/1_starter/java//src/main/resources/application.yml)
+- [schema.graphqls](/1_starter/java//src/main/resources/schema.graphqls)
   - GraphQL schema definition
