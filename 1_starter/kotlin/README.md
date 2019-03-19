@@ -1,4 +1,4 @@
-# Java starter
+# Kotlin starter
 
 This starter uses:
 
@@ -8,7 +8,7 @@ This starter uses:
 
 ## Points of interest
 
-- [application.yml](/1_starter/java//src/main/resources/application.yml)
+- [application.yml](/1_starter/kotlin/src/main/resources/application.yml)
   - coniguration of graphql servlet and graphiql console
-- [schema.graphqls](/1_starter/java//src/main/resources/application.yml)
+- [schema.graphqls](/1_starter/kotlin/src/main/resources/application.yml)
   - GraphQL schema definition
