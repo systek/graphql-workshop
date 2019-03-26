@@ -1,0 +1,37 @@
+type Ingredient {
+  id: Int!
+  name: String!
+
+  # Resolved from external API
+  markedPrice: Float
+  allergens: [String!]!
+}
+
+type Dish {
+  id: Int!
+  name: String!
+  price: Int!
+
+  # Resolved from local database
+  ingredients: [Ingredient!]
+}
+
+enum OrderBy {
+  PRICE
+  NAME
+}
+
+type Query {
+  dishes: [Dish!]!
+  dish(dishId: Int!): Dish
+  ingredients(orderBy: OrderBy): [Ingredient!]!
+}
+
+input Order {
+  dishId: Int!
+  quantity: Int!
+}
+
+type Mutation {
+  order(dishes: [Order!]!): Dish
+}
