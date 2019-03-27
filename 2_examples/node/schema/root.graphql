@@ -24,6 +24,7 @@ enum OrderBy {
 type Query {
   dishes: [Dish!]!
   dish(dishId: Int!): Dish
+  orders: [Receipt!]!
   ingredients(orderBy: OrderBy): [Ingredient!]!
 }
 
@@ -32,6 +33,12 @@ input Order {
   quantity: Int!
 }
 
+type Receipt {
+  orderId: String
+  delivery: String
+  items: [Dish!]!
+}
+
 type Mutation {
-  order(dishes: [Order!]!): Dish
+  order(dishes: [Order!]!): Receipt!
 }

@@ -22,19 +22,28 @@ const database = {
   ],
   ingredients: {
     100: [ingredients[0], ingredients[2]]
-  }
+  },
+  orders: []
 };
 
 function getDishes() {
   return database.dishes;
 }
 
+function getDish(id) {
+  return database.dishes.find(dish => dish.id === id);
+}
+
 function getIngredients() {
   return database.ingredients;
 }
 
-function add(order) {
+function addOrder(order) {
   database.orders.push(order);
+}
+
+function getOrders() {
+  return database.orders;
 }
 
 function findIngredients(dishId) {
@@ -44,5 +53,8 @@ function findIngredients(dishId) {
 
 module.exports = {
   getDishes,
+  getDish,
+  addOrder,
+  getOrders,
   findIngredients
 };

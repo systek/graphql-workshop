@@ -1,4 +1,4 @@
-const database = require("../storage");
+const database = require("../storage/memory");
 const marketPriceClient = require("../clients/marketPrice");
 const allergensClient = require("../clients/allergens");
 

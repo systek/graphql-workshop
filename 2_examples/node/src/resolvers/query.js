@@ -1,10 +1,11 @@
-const database = require('../storage')
+const database = require("../storage/memory");
 
 const Queryresolvers = {
   dishes: () => database.getDishes(),
   dish: (...args) => {
-      console.log(args)
+    console.log(args);
   },
+  orders: () => database.getOrders(),
   ingredients: () => ({})
 };
 
