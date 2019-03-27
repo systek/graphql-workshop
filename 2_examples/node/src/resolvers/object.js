@@ -1,4 +1,6 @@
 const database = require("../storage");
+const marketPriceClient = require("../clients/marketPrice");
+const allergensClient = require("../clients/allergens");
 
 const ObjectResolvers = {
   Dish: {
@@ -6,12 +8,10 @@ const ObjectResolvers = {
   },
   Ingredient: {
     markedPrice: ingredient => {
-      // TODO rest call
-      return 69;
+      return marketPriceClient.getPriceForIngredient(ingredient);
     },
     allergens: ingredient => {
-      // TODO rest call
-      return [];
+      return allergensClient.getAllergensForIngredient(ingredient);
     }
   }
 };
