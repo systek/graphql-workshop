@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "alias": "node.gql.systek.dev",
+  "name": "gqlworkshop.node",
+  "builds": [{ "src": "src/index.js", "use": "@now/node-server" }],
+  "routes": [{ "src": "/.*", "dest": "src/index.js" }]
+}

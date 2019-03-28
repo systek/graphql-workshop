@@ -2,6 +2,7 @@ const database = require("../storage/memory");
 
 const MutationResolver = {
   order: (_, { dishes }) => {
+    console.log("Order mutation received");
     const items = dishes.map(dishToOrder => {
       const dish = database.getDish(dishToOrder.dishId);
 
@@ -17,6 +18,8 @@ const MutationResolver = {
     };
 
     database.addOrder(order);
+
+    console.log("Order completed");
 
     return order;
   }

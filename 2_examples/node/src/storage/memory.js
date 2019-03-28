@@ -27,26 +27,31 @@ const database = {
 };
 
 function getDishes() {
+  console.log("Getting all dishes");
   return database.dishes;
 }
 
 function getDish(id) {
+  console.log(`Getting dish by id ${id}`);
   return database.dishes.find(dish => dish.id === id);
 }
 
 function getIngredients() {
-  return database.ingredients;
+  console.log(`Getting all ingredients`);
+  return ingredients;
 }
 
 function addOrder(order) {
+  console.log(`Adding order ${order.orderId}`);
   database.orders.push(order);
 }
 
 function getOrders() {
+  console.log(`Getting orders`);
   return database.orders;
 }
 
-function findIngredients(dishId) {
+function findIngredientsInDish(dishId) {
   console.log("Getting ingredinents for dish", dishId);
   return database.ingredients[dishId];
 }
@@ -56,5 +61,6 @@ module.exports = {
   getDish,
   addOrder,
   getOrders,
-  findIngredients
+  getIngredients,
+  findIngredientsInDish
 };
