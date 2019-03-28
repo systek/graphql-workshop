@@ -10,11 +10,11 @@ Entire starter is defined in index.js.
 
 ## Points of interest
 
-- [clients/allergens.js](/2_example/NODE/src/clients/allergens.js)
+- [clients/allergens.js](/2_examples/node/src/clients/allergens.js)
   - Client for communicating with allergens REST API. Perfect for stealing if you don't want to implement this your self!
-- [clients/markedPrice.js](/2_example/NODE/src/clients/markedPrice.js)
+- [clients/markedPrice.js](/2_examples/node/src/clients/markedPrice.js)
   - Client for communicating with markedPrice GraphQL API. Perfect for stealing if you don't want to implement this your self!
-- [schema.js](/2_example/NODE/src/schema.js)
+- [schema.js](/2_examples/node/src/schema.js)
   - GraphQL schema
-- [resolvers/base.js](/2_example/NODE/src/resolvers/base.js)
+- [resolvers/base.js](/2_examples/node/src/resolvers/base.js)
   - GraphQL base resolver, all other resolvers are sown together here. Follow the imports for query/mutation/object resolvers.
