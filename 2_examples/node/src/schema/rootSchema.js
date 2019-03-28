@@ -6,7 +6,7 @@ const schema = gql`
     name: String!
 
     # Resolved from external REST API
-    markedPrice: Float
+    marketPrice: Float
     # Resolved from external GraphQL API
     allergens: [String!]!
   }

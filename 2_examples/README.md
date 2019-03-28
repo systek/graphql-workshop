@@ -29,7 +29,7 @@ type Ingredient {
     name: String!
 
     # Resolved from external API
-    markedPrice: Float
+    marketPrice: Float
     allergens: [Allergen!]!
 }
 

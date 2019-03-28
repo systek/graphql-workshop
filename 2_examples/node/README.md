@@ -12,9 +12,9 @@ Entire starter is defined in index.js.
 
 - [clients/allergens.js](/2_examples/node/src/clients/allergens.js)
   - Client for communicating with allergens REST API. Perfect for stealing if you don't want to implement this your self!
-- [clients/markedPrice.js](/2_examples/node/src/clients/markedPrice.js)
-  - Client for communicating with markedPrice GraphQL API. Perfect for stealing if you don't want to implement this your self!
-- [schema.js](/2_examples/node/src/schema.js)
+- [clients/marketPrice.js](/2_examples/node/src/clients/marketPrice.js)
+  - Client for communicating with marketPrice GraphQL API. Perfect for stealing if you don't want to implement this your self!
+- [schema.js](/2_examples/node/src/schema/baseSchema.js)
   - GraphQL schema
 - [resolvers/base.js](/2_examples/node/src/resolvers/base.js)
   - GraphQL base resolver, all other resolvers are sown together here. Follow the imports for query/mutation/object resolvers.

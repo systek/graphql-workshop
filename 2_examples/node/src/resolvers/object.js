@@ -10,8 +10,8 @@ const ObjectResolvers = {
     }
   },
   Ingredient: {
-    markedPrice: ingredient => {
-      console.log("Resolving markedPrice for ingredient ", ingredient);
+    marketPrice: ingredient => {
+      console.log("Resolving marketPrice for ingredient ", ingredient);
       return marketPriceClient.getPriceForIngredient(ingredient);
     },
     allergens: ingredient => {

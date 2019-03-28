@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "alias": "marked.gql.systek.dev",
-  "name": "gqlworkshop.markedprice",
+  "alias": "market.gql.systek.dev",
+  "name": "gqlworkshop.marketprice",
   "builds": [{ "src": "*.js", "use": "@now/node" }]
 }
