@@ -8,6 +8,7 @@ import {
   ListItem,
   List,
   Quote,
+  Image,
   Slide,
   Text
 } from "spectacle";
@@ -18,7 +19,7 @@ require("normalize.css");
 
 const theme = createTheme(
   {
-    primary: "white",
+    primary: "#EEEEEE",
     secondary: "#1F2022",
     tertiary: "#03A9FC",
     quaternary: "#CECECE"
@@ -33,18 +34,20 @@ export default class Presentation extends React.Component {
   render() {
     return (
       <Deck transition={["slide"]} transitionDuration={500} theme={theme}>
-        <Slide bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+        <Slide bgColor="secondary">
+          <Heading size={1} fit caps lineHeight={1} textColor="primary">
             GraphQL workshop
           </Heading>
           <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            quick intro so we can get started
+            quick practical intro
           </Text>
         </Slide>
         <Slide bgColor="tertiary">
-          <Text margin="10px 0 0" size={1} fit bold>
-            TODO
-          </Text>
+          <Quote>
+            GraphQL is a query language for APIs and a runtime for fulfilling
+            those queries with your existing data.
+          </Quote>
+          <Cite textColor="primary">GraphQL.org</Cite>
         </Slide>
       </Deck>
     );
