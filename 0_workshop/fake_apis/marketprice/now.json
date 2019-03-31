@@ -2,5 +2,14 @@
   "version": 2,
   "alias": "market.gql.systek.dev",
   "name": "gqlworkshop.marketprice",
-  "builds": [{ "src": "*.js", "use": "@now/node" }]
+  "builds": [
+    {
+      "src": "*.js",
+      "use": "@now/node"
+    }
+  ],
+  "env": {
+    "MONGODB_USER": "mongo",
+    "MONGODB_PASSWORD": "@mongodb_password"
+  }
 }
