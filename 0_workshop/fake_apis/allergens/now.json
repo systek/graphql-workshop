@@ -1,13 +1,9 @@
 {
   "version": 2,
-  "alias": "market.gql.systek.dev",
-  "name": "gqlworkshop.marketprice",
-  "builds": [
-    {
-      "src": "*.js",
-      "use": "@now/node"
-    }
-  ],
+  "alias": "allergens.gql.systek.dev",
+  "name": "gqlworkshop.allergens",
+  "builds": [{"src": "src/index.js", "use": "@now/node-server"}],
+  "routes": [{"src": "/.*", "dest": "src/index.js"}],
   "env": {
     "MONGODB_USER": "mongo",
     "MONGODB_PASSWORD": "@mongodb_password"
