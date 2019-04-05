@@ -1,0 +1,9 @@
+type Person {
+  name: String
+  title: String
+  description: String
+}
+
+type Query {
+  developers: [Person]
+}
