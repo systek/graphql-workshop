@@ -12,11 +12,11 @@ const ObjectResolvers = {
   Ingredient: {
     marketPrice: ingredient => {
       console.log("Resolving marketPrice for ingredient ", ingredient);
-      return marketPriceClient.getPriceForIngredient(ingredient);
+      return marketPriceClient.getPriceForIngredient(ingredient.name);
     },
     allergens: ingredient => {
       console.log("Resolving allergens for ingredient ", ingredient);
-      return allergensClient.getAllergensForIngredient(ingredient);
+      return allergensClient.getAllergensForIngredient(ingredient.name);
     }
   }
 };

@@ -3,7 +3,8 @@ const ingredients = [
   { id: 2, name: "Bad Fish" },
   { id: 3, name: "Wasabi" },
   { id: 4, name: "Soy Sauce" },
-  { id: 5, name: "Wicked Fish" }
+  { id: 5, name: "Wicked Fish" },
+  { id: 6, name: "Saffron" }
 ];
 
 // Simple in memory data store
@@ -21,7 +22,8 @@ const database = {
     }
   ],
   ingredients: {
-    100: [ingredients[0], ingredients[2]]
+    100: [ingredients[0], ingredients[2]],
+    101: [ingredients[5]],
   },
   orders: []
 };
