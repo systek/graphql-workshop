@@ -1,30 +1,30 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Pretty Good Allergen API",
-    "description": "API documentation for Pretty Good Allergen API. Use at own risk!"
+    "title": "Pretty Good Market Price API",
+    "description": "API documentation for Pretty Good Market Price API. Use at own risk!"
   },
   "paths": {
-    "/allergens/{ingredient}": {
+    "/price/{ingredient}": {
       "get": {
-        "description": "Returns all allergens that exist for a given ingredient",
-        "operationId": "allergens",
+        "description": "Returns all market prices a given ingredient",
+        "operationId": "price",
         "parameters": [
           {
             "name": "ingredient",
             "in": "query",
-            "description": "ingredient to find allergens for",
+            "description": "ingredient to find market price for",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "allergens",
+            "description": "market price",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Allergen"
+                "$ref": "#/definitions/Price"
               }
             }
           },
@@ -39,7 +39,7 @@
     }
   },
   "definitions": {
-    "Allergen": {
+    "Price": {
       "type": "string"
     },
     "Error": {
