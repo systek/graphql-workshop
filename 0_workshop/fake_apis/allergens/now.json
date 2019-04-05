@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "scope": "systek",
   "alias": "allergens.gql.systek.dev",
   "name": "gqlworkshop.allergens",
   "builds": [{"src": "src/index.js", "use": "@now/node-server"}],

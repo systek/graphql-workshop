@@ -1,6 +1,12 @@
 {
+  "scripts": {
+    "now-build": "yarn gen:docs",
+    "gen:docs": "spectacle swagger-api.json -t dist"
+  },
   "dependencies": {
-    "express": "^4.16.4",
     "mongodb": "3.1.13"
+  },
+  "devDependencies": {
+    "spectacle-docs": "^1.0.7"
   }
 }

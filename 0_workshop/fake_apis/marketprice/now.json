@@ -1,9 +1,16 @@
 {
   "version": 2,
+  "scope": "systek",
   "alias": "market.gql.systek.dev",
   "name": "gqlworkshop.marketprice",
-  "builds": [{"src": "src/index.js", "use": "@now/node"}],
-  "routes": [{"src": "/.*", "dest": "src/index.js"}],
+  "builds": [
+    { "src": "src/index.js", "use": "@now/node" },
+    { "src": "dist/**/*", "use": "@now/static" }
+  ],
+  "routes": [
+    { "src": "/allergens", "dest": "src/index.js" },
+    { "src": "/(.*)", "dest": "dist/$1" }
+  ],
   "env": {
     "MONGODB_USER": "mongo",
     "MONGODB_PASSWORD": "@mongodb_password",

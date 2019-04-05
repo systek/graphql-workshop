@@ -1,0 +1,55 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Pretty Good Allergen API",
+    "description": "API documentation for Pretty Good Allergen API. Use at own risk!"
+  },
+  "paths": {
+    "/allergens/{ingredient}": {
+      "get": {
+        "description": "Returns all allergens that exist for a given ingredient",
+        "operationId": "allergens",
+        "parameters": [
+          {
+            "name": "ingredient",
+            "in": "query",
+            "description": "ingredient to find allergens for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "allergens",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Allergen"
+              }
+            }
+          },
+          "400": {
+            "description": "missing parameter",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Allergen": {
+      "type": "string"
+    },
+    "Error": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
