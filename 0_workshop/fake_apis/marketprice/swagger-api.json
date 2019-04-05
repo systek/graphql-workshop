@@ -22,10 +22,7 @@
           "200": {
             "description": "market price",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Price"
-              }
+              "$ref": "#/definitions/Price"
             }
           },
           "400": {
@@ -40,7 +37,11 @@
   },
   "definitions": {
     "Price": {
-      "type": "string"
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "integer", "format": "int32" }
+      }
     },
     "Error": {
       "type": "object",
