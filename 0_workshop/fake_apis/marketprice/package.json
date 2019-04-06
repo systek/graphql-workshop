@@ -4,7 +4,7 @@
     "gen:docs": "spectacle swagger-api.json -t dist"
   },
   "dependencies": {
-    "mongodb": "3.1.13"
+    "mongoose": "^5.4.22"
   },
   "devDependencies": {
     "spectacle-docs": "^1.0.7"

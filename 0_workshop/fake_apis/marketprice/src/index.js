@@ -1,24 +1,29 @@
-const MongoClient = require('mongodb').MongoClient
+const { parse } = require('url')
+const mongoose = require('mongoose')
+const { Schema } = mongoose
+
 const uri = `mongodb+srv://${process.env.MONGODB_USER}:${
   process.env.MONGODB_PASSWORD
-}@cluster0-83mfa.mongodb.net/test?retryWrites=true`
+}@cluster0-83mfa.mongodb.net/gqlworkshop?retryWrites=true`
 
-const client = new MongoClient(uri, { useNewUrlParser: true })
-
-const connectToMongo = () =>
-  new Promise((resolve, reject) => {
-    client.connect(function(err) {
-      if (err != null) {
-        console.error(err)
-        return reject(err)
-      }
-
-      console.info('Connected successfully to mongo database')
-      return resolve()
-    })
+mongoose
+  .connect(uri, { useNewUrlParser: true })
+  .then(() => {
+    console.info('Successfully connected to mongodb')
+  })
+  .catch(err => {
+    console.error(err)
   })
 
-const getMarketPrice = (req, res) => {
+const MarketPrice = mongoose.model(
+  'marketprice',
+  new Schema({
+    ingredient: String,
+    price: Number,
+  }),
+)
+
+const getMarketPrice = async (req, res) => {
   const { query } = parse(req.url, true)
   const { ingredient = undefined } = query
 
@@ -27,41 +32,31 @@ const getMarketPrice = (req, res) => {
     res.end(JSON.stringify({ message: 'missing ingredient parameter' }))
   }
 
-  connectToMongo()
-    .catch(reason => {
-      console.error(reason)
-      res.statusCode = 500
-      res.end('Unable to connect to datasource')
-    })
-    .then(() => {
-      const collection = client.db('gqlworkshop').collection('marketprice')
-      collection
-        .findOne({ ingredient: ingredient })
-        .then(result => {
-          if (result === null) {
-            res.end(JSON.stringify({}))
-          } else {
-            res.end(
-              JSON.stringify({
-                name: result.ingredient,
-                price: result.price,
-              }),
-            )
-          }
-        })
-        .catch(reason => {
-          console.error('reason: ', reason)
-          res.statusCode = 500
-          res.end('error reading from datasource')
-        })
-    })
+  let result
+  try {
+    result = await MarketPrice.findOne({ ingredient: ingredient })
+  } catch (e) {
+    res.statusCode = 500
+    res.end(
+      JSON.stringify({
+        message: 'Error during communication with data source',
+      }),
+    )
+  }
+
+  if (result === null) {
+    res.end(JSON.stringify({}))
+  } else {
+    res.end(
+      JSON.stringify({
+        name: result.ingredient,
+        price: result.price,
+      }),
+    )
+  }
 }
 
-const { parse } = require('url')
-
-module.exports = (req, res) => {
-  getMarketPrice(req, res)
-}
+module.exports = getMarketPrice
 
 if (!process.env.IS_NOW) {
   const http = require('http')
@@ -69,5 +64,7 @@ if (!process.env.IS_NOW) {
     getMarketPrice(req, res)
   })
 
-  app.listen(3000, () => console.log(`Example app listening on port ${3000}!`))
+  app.listen(3000, () =>
+    console.log(`Running locally in dev mode on port ${3000}!`),
+  )
 }
