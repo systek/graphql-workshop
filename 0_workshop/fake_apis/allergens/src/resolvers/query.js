@@ -1,28 +1,29 @@
-const MongoClient = require('mongodb').MongoClient
+const mongoose = require('mongoose')
+const { Schema } = mongoose
+
 const uri = `mongodb+srv://${process.env.MONGODB_USER}:${
   process.env.MONGODB_PASSWORD
-}@cluster0-83mfa.mongodb.net/test?retryWrites=true`
+}@cluster0-83mfa.mongodb.net/gqlworkshop?retryWrites=true`
 
-const client = new MongoClient(uri, { useNewUrlParser: true })
-
-const connectToMongo = () =>
-  new Promise((resolve, reject) => {
-    client.connect(function(err) {
-      if (err != null) {
-        logError(err)
-        return reject(err)
-      }
-
-      console.info('Connected successfully to mongo database')
-      return resolve()
-    })
+mongoose
+  .connect(uri, { useNewUrlParser: true })
+  .then(() => {
+    console.info('Successfully connected to mongodb')
+  })
+  .catch(err => {
+    console.error(err)
   })
 
-const lookupAllergens = async ingredient => {
-  await connectToMongo()
+const Allergen = mongoose.model(
+  'allergen',
+  new Schema({
+    ingredient: String,
+    allergens: [String],
+  }),
+)
 
-  const collection = client.db('gqlworkshop').collection('allergens')
-  const result = await collection.findOne({ ingredient: ingredient })
+const lookupAllergens = async ingredient => {
+  const result = await Allergen.findOne({ ingredient: ingredient })
 
   if (result === null) {
     return []
@@ -32,19 +33,15 @@ const lookupAllergens = async ingredient => {
 }
 
 const lookupFoods = async () => {
-  await connectToMongo()
-
-  const collection = client.db('gqlworkshop').collection('allergens')
-  const result = await collection.find({}).toArray()
-
-  console.log('result', result)
-
-  // TODO this doesn't work. Needs to correcly shape the return object.
+  const result = await Allergen.find({})
 
   if (result === null) {
     return []
   } else {
-    return result.allergens
+    return result.map(item => ({
+      name: item.ingredient,
+      allergens: item.allergens,
+    }))
   }
 }
 
