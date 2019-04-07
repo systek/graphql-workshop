@@ -1,6 +1,9 @@
 const database = require("../storage/memory");
 const marketPriceClient = require("../clients/marketPrice");
-const allergensClient = require("../clients/allergens");
+
+/* Use one of these clients, one uses normal fetch for communication, other uses apollo-link */
+//const allergensClient = require("../clients/allergens");
+const allergensClient = require("../clients/allergensApollo");
 
 const ObjectResolvers = {
   Dish: {
