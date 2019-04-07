@@ -13,9 +13,15 @@ const Queryresolvers = {
     console.log("Query resolver: getOrders");
     return database.getOrders();
   },
-  ingredients: () => {
-    console.log("Query resolver: ingredients");
-    return database.getIngredients();
+  ingredients: async (_, { orderBy }) => {
+    const ingredients = database.getIngredients();
+
+    if (orderBy == "NAME") {
+      console.log("Ordering by name");
+      return ingredients.sort((a, b) => a.name > b.name);
+    } else {
+      return ingredients;
+    }
   }
 };
 

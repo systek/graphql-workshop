@@ -21,7 +21,6 @@ const schema = gql`
   }
 
   enum OrderByEnum {
-    PRICE
     NAME
   }
 
