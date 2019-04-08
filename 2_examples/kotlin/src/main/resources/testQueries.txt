@@ -1,0 +1,58 @@
+# list all dishes
+query {
+   dishes {
+    id
+    name
+    price
+  }
+}
+
+# list dish
+query {
+   dish(dishId: 100) {
+    id
+    name
+    price
+  }
+}
+
+# create order
+mutation {
+  order(dishes: [
+    {
+      dishId: 100
+      quantity: 2
+    },
+    {
+      dishId: 101
+      quantity: 2
+    }
+  ]) {
+    orderId
+    delivery
+    items {
+      id
+    }
+  }
+}
+
+# list orders
+query {
+   orders{
+    orderId
+    delivery
+    items {
+      name
+    }
+  }
+}
+
+# list ingredients
+query {
+   ingredients (orderBy: PRICE) {
+    id
+    name
+    marketPrice
+    allergens
+  }
+}
