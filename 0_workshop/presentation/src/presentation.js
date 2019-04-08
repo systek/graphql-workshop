@@ -1,23 +1,24 @@
 import React from 'react'
 
-import { Appear, BlockQuote, Cite, Deck, Heading, ListItem, List, Quote, Image, Slide, Text, CodePane } from 'spectacle'
+import {
+  Appear,
+  BlockQuote,
+  Code,
+  Cite,
+  Deck,
+  Heading,
+  ListItem,
+  List,
+  Quote,
+  Image,
+  Slide,
+  Text,
+  CodePane,
+} from 'spectacle'
 
 import createTheme from 'spectacle/lib/themes/default'
 
 require('normalize.css')
-
-const theme = createTheme(
-  {
-    primary: '#EEEEEE',
-    secondary: '#1F2022',
-    tertiary: '#03A9FC',
-    quaternary: '#CECECE',
-  },
-  {
-    primary: 'Montserrat',
-    secondary: 'Helvetica',
-  },
-)
 
 const code = {
   graphql: `{
@@ -89,6 +90,19 @@ type Weather {
 `,
 }
 
+const theme = createTheme(
+  {
+    primary: '#EEEEEE',
+    secondary: '#1F2022',
+    tertiary: '#03A9FC',
+    quaternary: '#CECECE',
+  },
+  {
+    primary: 'Montserrat',
+    secondary: 'Helvetica',
+  },
+)
+
 export default class Presentation extends React.Component {
   render() {
     return (
@@ -100,6 +114,29 @@ export default class Presentation extends React.Component {
           <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
             quick practical intro
           </Text>
+        </Slide>
+        <Slide bgColor="secondary">
+          <Heading size={1} fit caps lineHeight={1} textColor="primary">
+            while I talk
+          </Heading>
+          <Text textColor="tertiary">Go to</Text>
+          <Code textColor="quaternary" size={3}>
+            https://wrk.karl.run
+          </Code>
+          <Text textColor="tertiary">and check out the repository</Text>
+          <Appear>
+            <List textColor="tertiary">
+              <ListItem>
+                Java/Kotlin: <Code textColor="quaternary">./gradlew</Code>
+              </ListItem>
+              <ListItem>
+                Node: <Code textColor="quaternary">yarn</Code>
+              </ListItem>
+              <ListItem>
+                .NET Core: <Code textColor="quaternary">dotnet restore</Code>
+              </ListItem>
+            </List>
+          </Appear>
         </Slide>
         <Slide bgColor="tertiary">
           <Quote>
@@ -150,6 +187,85 @@ export default class Presentation extends React.Component {
               <CodePane lang="graphql" source={code.schema} theme="dark" />
             </div>
           </Appear>
+        </Slide>
+        <Slide bgColor="tertiary">
+          <Text textColor="primary" fit bold>
+            #goals
+          </Text>
+          <Text margin="32px 0 0" textColor="secondary" size={1} fit bold>
+            what you will do in this workshop
+          </Text>
+        </Slide>
+        <Slide bgColor="secondary">
+          <List textColor="tertiary">
+            <Appear>
+              <ListItem>
+                Implement query resolvers
+                <Text textColor="quaternary" margin="0 4rem 0" textSize="2rem">
+                  Your classic "GET request endpoint"
+                </Text>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                Implement mutation resolvers
+                <Text textColor="quaternary" margin="0 4rem 0" textSize="2rem">
+                  Your classic "POST request endpoint"
+                </Text>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                Implement object resolvers
+                <Text textColor="quaternary" margin="0 4rem 0" textSize="2rem">
+                  Your "I have object X, how does it relate to Y" relationship.
+                </Text>
+              </ListItem>
+            </Appear>
+          </List>
+        </Slide>
+        <Slide bgColor="secondary">
+          <Text textColor="primary" bold>
+            next step
+          </Text>
+          <List textColor="tertiary" ordered>
+            <Appear>
+              <ListItem textSize="1.8rem">
+                Get familiar with the code base, run the server, look at the build, interact with GraphiQL
+                <Text textColor="quaternary" margin="0 4rem 0" textSize="1.5rem">
+                  Play around!
+                </Text>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem textSize="1.8rem">Look at the goal description in the README in the repository</ListItem>
+            </Appear>
+            <Appear>
+              <ListItem textSize="1.8rem">
+                Start defining your schema and match a query resolver implementation to it
+                <Text textColor="quaternary" margin="0 4rem 0" textSize="1.5rem">
+                  If you don't want to spend time building mock datasources/clients, feel free to steal them from the
+                  complete examples
+                </Text>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem textSize="1.8rem">
+                Look at how mutations differ from queries, how are they implemented?
+                <Text textColor="quaternary" margin="0 4rem 0" textSize="1.5rem">
+                  Tip: They might not be very different
+                </Text>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem textSize="1.8rem">
+                Define how two objects relate to each other, define a resolver between them and try to request them.
+                <Text textColor="quaternary" margin="0 4rem 0" textSize="1.5rem">
+                  Try making them circular!
+                </Text>
+              </ListItem>
+            </Appear>
+          </List>
         </Slide>
       </Deck>
     )
