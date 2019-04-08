@@ -18,6 +18,8 @@ import {
 
 import createTheme from 'spectacle/lib/themes/default'
 
+require('prismjs/components/prism-graphql')
+require('prismjs/components/prism-json')
 require('normalize.css')
 
 const code = {
