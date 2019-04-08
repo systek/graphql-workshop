@@ -22,6 +22,7 @@ const schema = gql`
 
   enum OrderByEnum {
     NAME
+    PRICE
   }
 
   type Query {
