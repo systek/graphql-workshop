@@ -9,5 +9,4 @@ public class GraphqlworkshopApplication {
   public static void main(String[] args) {
     SpringApplication.run(GraphqlworkshopApplication.class, args);
   }
-
 }
