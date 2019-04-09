@@ -28,7 +28,7 @@ const schema = gql`
   type Query {
     # Gets all dishes available
     dishes: [Dish!]!
-    # Gets spesicif dish by dishId
+    # Gets specific dish by dishId
     dish(dishId: Int!): Dish
     # Gets all current orders
     orders: [Receipt!]!
