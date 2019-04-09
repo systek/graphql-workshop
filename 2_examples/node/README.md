@@ -6,8 +6,6 @@ This example uses:
 - graphql for graphql runtime
 - nodemon for hot-reloading
 
-Entire starter is defined in index.js.
-
 ## Points of interest
 
 - [clients/allergens.js](/2_examples/node/src/clients/allergens.js)
