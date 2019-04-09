@@ -14,13 +14,13 @@ Marked price of food items:
 
 https://market.gql.systek.dev/
 
-REST API, documentation: TODO
+REST API, documentation: Use spectacle docs at root of URL.
 
 Allergens of food items:
 
 https://allergens.gql.systek.dev/
 
-GraphQL API, documentation: Use GraphiQL
+GraphQL API, documentation: Use GraphiQL at root of URL.
 
 ## What are you making?
 
