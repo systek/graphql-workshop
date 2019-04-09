@@ -14,6 +14,8 @@ Entire starter is defined in index.js.
   - Client for communicating with allergens REST API. Perfect for stealing if you don't want to implement this your self!
 - [clients/marketPrice.js](/2_examples/node/src/clients/marketPrice.js)
   - Client for communicating with marketPrice GraphQL API. Perfect for stealing if you don't want to implement this your self!
+- [storage/memory.js](/2_examples/node/src/storage/memory.js)
+  - Simple in memory fake datastore that has ingredients, dishes and orders
 - [schema.js](/2_examples/node/src/schema/rootSchema.js)
   - GraphQL schema
 - [resolvers/base.js](/2_examples/node/src/resolvers/base.js)
