@@ -84,7 +84,7 @@ Dish has an integer ID, a name, a price. It should also be extended to resolve a
 
 #### `Ingredient`
 
-Ingredient has an integer ID and a name. It also be extended to have two externally resolveable variables. "Market price" and "allergens" (which is a list). The shape of these objects you can chose your self, based on what the API provides.
+Ingredient has an integer ID and a name. It shall also be extended to have two externally resolveable variables. "Market price" and "allergens" (which is a list). The shape of these objects you can chose your self, based on what the API provides.
 
 ## Stuck or done? Look at the completed examples
 
