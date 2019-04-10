@@ -33,7 +33,8 @@ class DataSource {
     fun addOrder(order: Order) = orders.add(order)
 
     fun findIngredientsInDish(dishId: Long): Collection<Ingredient> {
-        val ingredientIds = dishIngredients.first { it.dishId == dishId }.ingredientIds
+        val ingredientIds = dishIngredients.firstOrNull { it.dishId == dishId }?.ingredientIds ?: return emptyList()
+
         return ingredients.filter { it.id in ingredientIds }
     }
 }

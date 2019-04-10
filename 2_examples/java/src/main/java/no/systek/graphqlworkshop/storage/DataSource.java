@@ -58,10 +58,15 @@ public class DataSource {
   }
 
   public Collection<Ingredient> findIngredientsInDish(long dishId) {
-    Collection<Long> ingredientIds = dishIngredients.stream()
-        .filter(dishIngredient -> dishIngredient.getDishId() == dishId)
-        .findFirst()
-        .orElseThrow(IllegalArgumentException::new).getIngredientIds();
+    DishIngredient dishIngredient = dishIngredients.stream()
+            .filter(di -> di.getDishId() == dishId)
+            .findFirst()
+            .orElse(null);
+
+    if(dishIngredient == null) {
+      return Collections.emptyList();
+    }
+    Collection<Long> ingredientIds = dishIngredient.getIngredientIds();
 
     return ingredientIds.stream().map(this::getIngredient).collect(Collectors.toList());
   }
