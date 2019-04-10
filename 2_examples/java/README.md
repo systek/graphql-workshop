@@ -12,9 +12,9 @@ This starter uses:
   - coniguration of graphql servlet and graphiql console
 - [schema.graphqls](/1_starter/java//src/main/resources/schema.graphqls)
   - GraphQL schema definition
-- [AllergensClient.java](/2_examples/java/src/main/kotlin/no/systek/graphqlworkshop/clients/AllergensClient.java)
+- [AllergensClient.java](/2_examples/java/src/main/java/no/systek/graphqlworkshop/clients/AllergensClient.java)
   - Client for communicating with allergens REST API. Perfect for stealing if you don't want to implement this your self!
-- [MarketPriceClient.java](/2_examples/java/src/main/kotlin/no/systek/graphqlworkshop/clients/MarketPriceClient.java)
+- [MarketPriceClient.java](/2_examples/java/src/main/java/no/systek/graphqlworkshop/clients/MarketPriceClient.java)
   - Client for communicating with marketPrice GraphQL API. Perfect for stealing if you don't want to implement this your self!
 - [DataSource.java](/2_examples/java/src/main/java/no/systek/graphqlworkshop/storage/DataSource.java)
   - Simple in memory fake datastore that has ingredients, dishes and orders
