@@ -10,7 +10,7 @@ This example uses:
 
 - [clients/allergens.js](/2_examples/node/src/clients/allergens.js)
   - Client for communicating with allergens REST API. Perfect for stealing if you don't want to implement this your self!
-- [clients/allergensApollo.js](/2_examples/node/src/clients/allergens.js)
+- [clients/allergensApollo.js](/2_examples/node/src/clients/allergensApollo.js)
   - Alternative client for communicating with allergens REST API through the use of apollo-link.
 - [clients/marketPrice.js](/2_examples/node/src/clients/marketPrice.js)
   - Client for communicating with marketPrice GraphQL API. Perfect for stealing if you don't want to implement this your self!

@@ -2,4 +2,4 @@
 
 ## I said choose one
 
-### [node](/1_starter/node) | [java](/1_starter/java) | [kotlin](/1_starter/kotlin) | [.net core](/1_starter/core)
+### [node](/1_starter/node) | [java](/1_starter/java) | [kotlin](/1_starter/kotlin)
