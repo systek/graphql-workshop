@@ -18,7 +18,7 @@ Get workshopping!
 
 ## Stuck or done? Look at the completed examples
 
-### [node](/3_examples/node) | [java](/3_examples/java) | [kotlin](/3_examples/kotlin)
+### [node](/3_examples/node) | [java](/3_examples/java) | [kotlin](/3_examples/kotlin) | [react](/3_examples/react)
 
 Other resources:
 
