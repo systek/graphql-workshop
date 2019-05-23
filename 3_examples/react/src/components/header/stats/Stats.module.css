@@ -1,0 +1,28 @@
+.stats {
+  height: 58px;
+  width: 58px;
+  margin-right: 8px;
+}
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.counter > div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 26px;
+  font-size: 1.6rem;
+}
+
+.counter > div:nth-child(2) {
+  height: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+}

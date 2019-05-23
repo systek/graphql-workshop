@@ -1,0 +1,24 @@
+html {
+  overflow: hidden;
+}
+
+body {
+  color: #e2e2e2;
+  background-color: #121212;
+}
+
+.appContainer {
+  height: calc(100vh - 58px);
+  display: flex;
+}
+
+@media screen and (max-width: 612px) {
+  html {
+    overflow: unset;
+  }
+
+  .appContainer {
+    height: unset;
+    flex-wrap: wrap-reverse;
+  }
+}

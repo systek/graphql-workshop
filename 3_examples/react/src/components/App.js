@@ -3,21 +3,20 @@ import { ApolloProvider } from "react-apollo";
 
 import client from "../apollo/client";
 
-import Example from "./example/Example";
-import "./App.css";
+import Header from "./header/Header";
+import OrderSystem from "./ordersystem/OrderSystem";
+import OrderList from "./orderlist/OrderList";
 
-function App() {
-  return (
-    <ApolloProvider client={client}>
-      <div className="App">
-        <header className="App-header">
-          React starter for GraphQL workshop
-        </header>
-        <p>Example component that fetches some data:</p>
-        <Example />
-      </div>
-    </ApolloProvider>
-  );
-}
+import css from "./App.module.css";
+
+const App = () => (
+  <ApolloProvider client={client}>
+    <Header />
+    <div className={css.appContainer}>
+      <OrderSystem />
+      <OrderList />
+    </div>
+  </ApolloProvider>
+);
 
 export default App;
