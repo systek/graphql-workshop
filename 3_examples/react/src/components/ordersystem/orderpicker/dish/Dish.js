@@ -1,7 +1,8 @@
 import React from 'react'
 
-import css from './Dish.module.css'
 import Card from '../../../shared/card/Card'
+
+import css from './Dish.module.css'
 
 const Dish = ({ dish, add }) => {
   const [count, setCount] = React.useState(1)

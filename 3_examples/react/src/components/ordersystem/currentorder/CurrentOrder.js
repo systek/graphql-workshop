@@ -2,11 +2,11 @@ import React from 'react'
 import cn from 'classnames'
 import { Mutation } from 'react-apollo'
 
+import { ORDERS } from '../../../apollo/queries'
 import { SUBMIT_ORDER } from '../../../apollo/mutations'
 
 import CurrentOrdersList from './currentorderlist/CurrentOrderList'
 import css from './CurrentOrder.module.css'
-import { ORDERS } from '../../../apollo/queries'
 
 const USE_CACHE_UPDATE = true
 
