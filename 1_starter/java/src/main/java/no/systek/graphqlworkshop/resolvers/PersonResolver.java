@@ -1,6 +1,7 @@
-package no.systek.graphqlworkshop;
+package no.systek.graphqlworkshop.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
+import no.systek.graphqlworkshop.storage.Person;
 import org.springframework.stereotype.Component;
 
 @Component
