@@ -3,5 +3,10 @@
   "alias": "node.gql.systek.dev",
   "name": "gqlworkshop.node",
   "builds": [{ "src": "src/index.js", "use": "@now/node-server" }],
-  "routes": [{ "src": "/.*", "dest": "src/index.js" }]
+  "routes": [{ "src": "/.*", "dest": "src/index.js" }],
+  "env": {
+    "MONGODB_USER": "mongo",
+    "MONGODB_PASSWORD": "@mongodb_password",
+    "USE_MONGO": true
+  }
 }

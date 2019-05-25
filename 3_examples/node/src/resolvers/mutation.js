@@ -1,15 +1,17 @@
-const database = require("../storage/memory");
+const database = require("../storage");
 
 const MutationResolver = {
-  order: (_, { dishes }) => {
+  order: async (_, { dishes }) => {
     console.log("Order mutation received");
-    const items = dishes.map(dishToOrder => {
-      const dish = database.getDish(dishToOrder.dishId);
+    const items = await Promise.all(
+      dishes.map(async dishToOrder => {
+        const dish = await database.getDish(dishToOrder.dishId);
 
-      if (!dish) throw new Error("Invalid dish: Doesn't exist");
+        if (!dish) throw new Error("Invalid dish: Doesn't exist");
 
-      return dish;
-    });
+        return dish;
+      })
+    );
 
     const order = {
       id: `${Math.round(Math.random() * 10000000)}`,
@@ -18,7 +20,7 @@ const MutationResolver = {
       items: items
     };
 
-    database.addOrder(order);
+    await database.addOrder(order);
 
     console.log("Order completed");
 

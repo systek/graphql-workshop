@@ -1,4 +1,4 @@
-const database = require("../storage/memory");
+const database = require("../storage");
 const marketPriceClient = require("../clients/marketPrice");
 
 /* Use one of these clients, one uses normal fetch for communication, other uses apollo-link */

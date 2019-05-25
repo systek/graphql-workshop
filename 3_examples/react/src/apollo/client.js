@@ -5,7 +5,9 @@ const cache = new InMemoryCache({
 })
 
 const client = new ApolloClient({
+  // For dev with node example running on localhost:4000
   uri: '/',
+  // uri: 'https://node.gql.systek.dev',
   cache,
 })
 

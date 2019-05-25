@@ -1,7 +1,7 @@
-const database = require("../storage/memory");
+const database = require("../storage");
 const marketPriceClient = require("../clients/marketPrice");
 
-const Queryresolvers = {
+const QueryResolvers = {
   dishes: () => {
     console.log("Query resolver: dishes");
 
@@ -20,11 +20,11 @@ const Queryresolvers = {
   ingredients: async (_, { orderBy }) => {
     const ingredients = database.getIngredients();
 
-    if (orderBy == "NAME") {
+    if (orderBy === "NAME") {
       console.log("Ordering by name");
 
       return ingredients.sort((a, b) => a.name > b.name);
-    } else if (orderBy == "PRICE") {
+    } else if (orderBy === "PRICE") {
       console.log(
         "Ordering by price (looking up every item twice because of resolving)"
       );
@@ -47,4 +47,4 @@ const Queryresolvers = {
   }
 };
 
-module.exports = Queryresolvers;
+module.exports = QueryResolvers;

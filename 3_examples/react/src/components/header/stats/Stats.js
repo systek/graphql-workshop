@@ -19,7 +19,7 @@ const Stats = () => (
           return <Spinner smoll />
         }
 
-        const orders = data.orders.length
+        const orders = data.orders.filter(order => !order.delivered).length
 
         return (
           <div className={css.counter}>

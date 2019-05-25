@@ -10,36 +10,12 @@ const ingredients = [
 // Simple in memory data store
 const database = {
   dishes: [
-    {
-      id: 100,
-      name: "Sushi 8 pieces",
-      price: 89.0
-    },
-    {
-      id: 101,
-      name: "Sushi 16 pieces",
-      price: 89.0
-    },
-    {
-      id: 102,
-      name: "Sashimi Only",
-      price: 129.0
-    },
-    {
-      id: 103,
-      name: "Maki Town 1",
-      price: 59.0
-    },
-    {
-      id: 104,
-      name: "Tempered Tempura",
-      price: 220
-    },
-    {
-      id: 105,
-      name: "One Man Party Platter (38 pieces)",
-      price: 429
-    }
+    { id: 100, name: "Sushi 8 pieces", price: 89.0 },
+    { id: 101, name: "Sushi 16 pieces", price: 89.0 },
+    { id: 102, name: "Sashimi Only", price: 129.0 },
+    { id: 103, name: "Maki Town 1", price: 59.0 },
+    { id: 104, name: "Tempered Tempura", price: 220 },
+    { id: 105, name: "One Man Party Platter (38 pieces)", price: 429 }
   ],
   ingredients: {
     100: [ingredients[0], ingredients[2]],
@@ -85,7 +61,7 @@ function markAsDelivered(orderId) {
 
   database.orders[orderToUpdateIndex].delivered = new Date().toISOString();
 
-  return database.orders[orderToUpdateIndex]
+  return database.orders[orderToUpdateIndex];
 }
 
 function getOrders() {
