@@ -13,7 +13,7 @@
 
 .orderItem {
   display: flex;
-  border-right: 1px dashed #a239ca;
+  border-right: 1px dashed var(--accent);
   padding-right: 8px;
 }
 

@@ -32,7 +32,7 @@
   position: absolute;
   width: 26px;
   height: 26px;
-  background: #a239ca;
+  background: var(--accent);
   animation: heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -43,7 +43,7 @@
   display: block;
   width: 26px;
   height: 26px;
-  background: #a239ca;
+  background: var(--accent);
 }
 .heart div:before {
   left: -17px;

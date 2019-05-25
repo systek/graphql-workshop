@@ -3,8 +3,8 @@ html {
 }
 
 body {
-  color: #e2e2e2;
-  background-color: #121212;
+  color: var(--text);
+  background-color: var(--background);
 }
 
 .appContainer {

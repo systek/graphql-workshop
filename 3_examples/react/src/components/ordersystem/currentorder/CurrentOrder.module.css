@@ -1,15 +1,15 @@
 .currentOrderWrapper {
   height: 54px;
 
-  border-top: 1px dashed #a239ca;
+  border-top: 1px dashed var(--accent);
   padding-top: 8px;
   display: flex;
 }
 
 .submitButton {
-  color: #e2e2e2;
+  color: var(--text);
   flex: 0 0 54px;
-  background-color: #a239ca;
+  background-color: var(--accent);
   border-radius: 50%;
   font-weight: 700;
   font-size: 0.7rem;
