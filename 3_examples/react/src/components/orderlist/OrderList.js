@@ -5,9 +5,9 @@ import Card from '../shared/card/Card'
 
 import { ORDERS } from '../../apollo/queries'
 import Spinner from '../shared/spinner/Spinner'
+import Error from '../shared/error/Error'
 
 import css from './OrderList.module.css'
-import Error from '../shared/error/Error'
 
 const ListLoading = () => (
   <div className={css.listLoading}>
@@ -15,22 +15,52 @@ const ListLoading = () => (
   </div>
 )
 
-const Orders = ({ title, orders }) => (
-  <div>
-    <h4>{title}</h4>
-    {orders.map(({ orderId, delivery }) => (
-      <div key={orderId}>
-        <p>
-          {orderId}: {delivery}
-        </p>
+const OrderItem = ({ order }) => (
+  <div className={css.orderItem} key={order.orderId}>
+    <div className={css.orderContent}>
+      <div className={css.orderTitle}>Order {order.orderId.slice(-6)}</div>
+      <ul>
+        {order.items.map(item => (
+          <li>{item.name}</li>
+        ))}
+      </ul>
+      <div className={css.deliveryAt}>
+        Expected delivery at {new Date(order.delivery).toLocaleTimeString()}
       </div>
-    ))}
+    </div>
+    <button>Mark delivered</button>
   </div>
 )
 
+const byDelivery = (a, b) => b.delivery.localeCompare(a.delivery)
+
+const Orders = ({ title, orders, collapsedByDefault }) => {
+  const [collapsed, setCollapsed] = React.useState(collapsedByDefault || false)
+
+  return (
+    <div>
+      <button
+        className={css.headerButton}
+        onClick={() => setCollapsed(c => !c)}
+      >
+        <h3>
+          {title} ({orders.length}) {collapsed ? '▲' : '▼'}
+        </h3>
+      </button>
+      {!collapsed && (
+        <div>
+          {orders.sort(byDelivery).map(order => (
+            <OrderItem order={order} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 const OrderList = () => (
   <Card className={css.orderListContainer}>
-    <h3>Deliveries</h3>
+    <h2>Deliveries</h2>
     <Query query={ORDERS}>
       {({ loading, error, data }) => {
         if (error) return <Error error={error} />
@@ -39,7 +69,11 @@ const OrderList = () => (
         return (
           <>
             <Orders title="Undelivered" orders={data.orders} />
-            <Orders title="Finished deliveries" orders={data.orders} />
+            <Orders
+              title="Finished deliveries"
+              orders={data.orders}
+              collapsedByDefault
+            />
           </>
         )
       }}

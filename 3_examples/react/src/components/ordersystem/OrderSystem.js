@@ -38,12 +38,16 @@ const OrderSystem = () => {
     dispatch({ type: 'add', payload: order })
   }, [])
 
+  const clearOrder = React.useCallback(() => {
+    dispatch({ type: 'clear' })
+  }, [])
+
   return (
     <Card className={css.orderSystemContainer}>
       <div className={css.content}>
-        <h3>New orders</h3>
+        <h2>New orders</h2>
         <OrderPicker className={css.picker} add={addOrder} />
-        <CurrentOrder className={css.orders} orders={orders} />
+        <CurrentOrder orders={orders} clear={clearOrder} />
       </div>
     </Card>
   )

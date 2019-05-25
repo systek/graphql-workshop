@@ -8,7 +8,7 @@ import CurrentOrdersList from './currentorderlist/CurrentOrderList'
 import css from './CurrentOrder.module.css'
 import { ORDERS } from '../../../apollo/queries'
 
-const SubmitOrderButton = ({ orders }) => (
+const SubmitOrderButton = ({ orders, clearOrderCart }) => (
   <Mutation mutation={SUBMIT_ORDER} refetchQueries={[{ query: ORDERS }]}>
     {mutation => {
       const selectedDishes = Object.values(orders).map(order => ({
@@ -21,6 +21,8 @@ const SubmitOrderButton = ({ orders }) => (
           variables: {
             dishes: selectedDishes,
           },
+        }).then(() => {
+          clearOrderCart()
         })
       }
 
@@ -57,11 +59,11 @@ const OrderTotal = ({ orders }) => {
   )
 }
 
-const CurrentOrder = ({ orders, className }) => (
+const CurrentOrder = ({ orders, className, clear }) => (
   <div className={cn(css.currentOrderWrapper, className)}>
     <CurrentOrdersList orders={Object.values(orders)} />
     <OrderTotal orders={orders} />
-    <SubmitOrderButton orders={orders} />
+    <SubmitOrderButton orders={orders} clearOrderCart={clear} />
   </div>
 )
 

@@ -5,10 +5,10 @@ import Cart from './stats/Stats'
 import css from './Header.module.css'
 
 const normalTheme = {
-  background: '#b4bdc0',
-  foreground: '#e3f9ff',
+  background: '#d8e1e4',
+  foreground: '#ffffff',
   text: '#200101',
-  accent: '#a239ca',
+  accent: '#ed90ff',
 }
 
 const darkTheme = {
