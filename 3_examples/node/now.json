@@ -7,6 +7,6 @@
   "env": {
     "MONGODB_USER": "mongo",
     "MONGODB_PASSWORD": "@mongodb_password",
-    "USE_MONGO": true
+    "USE_MONGO": "true"
   }
 }

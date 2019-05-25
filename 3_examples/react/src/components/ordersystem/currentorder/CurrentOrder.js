@@ -8,7 +8,7 @@ import { SUBMIT_ORDER } from '../../../apollo/mutations'
 import CurrentOrdersList from './currentorderlist/CurrentOrderList'
 import css from './CurrentOrder.module.css'
 
-const USE_CACHE_UPDATE = true
+const USE_CACHE_UPDATE = false
 
 const SubmitOrderButton = ({ orders, clearOrderCart }) => (
   <Mutation mutation={SUBMIT_ORDER} refetchQueries={[{ query: ORDERS }]}>
