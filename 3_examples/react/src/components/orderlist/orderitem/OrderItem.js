@@ -31,7 +31,9 @@ const MarkDeliveredButton = ({ order }) => (
 export const OrderItem = ({ order }) => (
   <div className={css.orderItem} key={order.id}>
     <div className={css.orderContent}>
-      <div className={css.orderTitle}>Order {order.id.slice(-6)}</div>
+      <div className={css.orderTitle}>
+        Order {order.id.startsWith('temporary') ? 'pending...' : order.id}
+      </div>
       <ul>
         {order.items.map(item => (
           <li key={item.name}>{item.name}</li>
