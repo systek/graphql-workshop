@@ -1,0 +1,61 @@
+.dishWrapper {
+  display: flex;
+
+  flex: 0 0 calc(33% - 32px);
+  margin: 16px;
+}
+
+.dishIcon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #a239ca;
+  border-radius: 50%;
+  margin: 4px 16px 4px 4px;
+}
+
+.dishDetails {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex: 1 1;
+}
+
+.priceDetails {
+  display: flex;
+}
+
+.priceDetails > div {
+  margin: 0 4px;
+}
+
+.buttonSection {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonSection > button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 16px;
+  width: 100%;
+  color: #a239ca;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+}
+
+.buttonSection > button:nth-child(2) {
+  flex: 1 1;
+  font-size: 1rem;
+}

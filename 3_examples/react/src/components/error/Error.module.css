@@ -1,0 +1,12 @@
+.error {
+  color: #bc0000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error.smoll {
+  font-size: 2rem;
+}

@@ -1,13 +1,13 @@
-import React from "react";
-import { ApolloProvider } from "react-apollo";
+import React from 'react'
+import { ApolloProvider } from 'react-apollo'
 
-import client from "../apollo/client";
+import client from '../apollo/client'
 
-import Header from "./header/Header";
-import OrderSystem from "./ordersystem/OrderSystem";
-import OrderList from "./orderlist/OrderList";
+import Header from './header/Header'
+import OrderSystem from './ordersystem/OrderSystem'
+import OrderList from './orderlist/OrderList'
 
-import css from "./App.module.css";
+import css from './App.module.css'
 
 const App = () => (
   <ApolloProvider client={client}>
@@ -17,6 +17,6 @@ const App = () => (
       <OrderList />
     </div>
   </ApolloProvider>
-);
+)
 
-export default App;
+export default App

@@ -1,7 +1,7 @@
-import ApolloClient from "apollo-boost";
+import ApolloClient from 'apollo-boost'
 
 const client = new ApolloClient({
-  uri: "https://node.gql.systek.dev/"
-});
+  uri: 'https://node.gql.systek.dev/',
+})
 
-export default client;
+export default client

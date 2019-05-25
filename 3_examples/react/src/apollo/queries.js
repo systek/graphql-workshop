@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 export const ORDERS = gql`
   query Orders {
@@ -12,4 +12,18 @@ export const ORDERS = gql`
       }
     }
   }
-`;
+`
+
+export const DISHES = gql`
+  query AvailableDishes {
+    dishes {
+      id
+      name
+      price
+      ingredients {
+        id
+        name
+      }
+    }
+  }
+`

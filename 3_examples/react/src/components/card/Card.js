@@ -1,10 +1,10 @@
-import React from "react";
-import cn from "classnames";
+import React from 'react'
+import cn from 'classnames'
 
-import css from "./Card.module.css";
+import css from './Card.module.css'
 
 const Card = ({ className, children }) => (
   <div className={cn(css.card, className)}>{children}</div>
-);
+)
 
-export default Card;
+export default Card
