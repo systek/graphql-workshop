@@ -2,8 +2,8 @@ import React from 'react'
 import { Query } from 'react-apollo'
 
 import { ORDERS } from '../../../apollo/queries'
-import Spinner from '../../spinner/Spinner'
-import Error from '../../error/Error'
+import Spinner from '../../shared/spinner/Spinner'
+import Error from '../../shared/error/Error'
 
 import css from './Stats.module.css'
 

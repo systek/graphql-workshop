@@ -1,4 +1,5 @@
 .orderListContainer {
+  overflow: auto;
   flex: 0 0 25%;
   min-width: 250px;
   box-sizing: border-box;

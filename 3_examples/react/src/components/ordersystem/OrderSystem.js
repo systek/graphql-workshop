@@ -1,33 +1,52 @@
 import React from 'react'
-import { Query } from 'react-apollo'
 
-import { DISHES } from '../../apollo/queries'
-import Spinner from '../spinner/Spinner'
-import Card from '../card/Card'
+import Card from '../shared/card/Card'
+import Error from '../shared/error/Error'
 
+import CurrentOrder from './currentorder/CurrentOrder'
 import OrderPicker from './orderpicker/OrderPicker'
 import css from './OrderSystem.module.css'
-import Error from '../error/Error'
 
-const OrderSystem = () => (
-  <Card className={css.orderSystemContainer}>
-    <div className={css.content}>
-      <h3>New orders</h3>
-      <Query query={DISHES}>
-        {({ data, loading, error }) => {
-          if (error) {
-            return <Error error={error} />
-          }
+const orderReducer = (state, action) => {
+  switch (action.type) {
+    case 'add': {
+      return {
+        ...state,
+        [action.payload.dish.id]: action.payload,
+      }
+    }
+    case 'remove': {
+      const newState = {
+        ...state,
+      }
+      delete newState[action.payload.id]
 
-          if (loading) {
-            return <Spinner fullscreen />
-          }
+      return newState
+    }
+    case 'clear': {
+      return {}
+    }
+    default:
+      throw new Error('Invalid action')
+  }
+}
 
-          return <OrderPicker dishes={data.dishes} />
-        }}
-      </Query>
-    </div>
-  </Card>
-)
+const OrderSystem = () => {
+  const [orders, dispatch] = React.useReducer(orderReducer, {})
+
+  const addOrder = React.useCallback(order => {
+    dispatch({ type: 'add', payload: order })
+  }, [])
+
+  return (
+    <Card className={css.orderSystemContainer}>
+      <div className={css.content}>
+        <h3>New orders</h3>
+        <OrderPicker className={css.picker} add={addOrder} />
+        <CurrentOrder className={css.orders} orders={orders} />
+      </div>
+    </Card>
+  )
+}
 
 export default OrderSystem

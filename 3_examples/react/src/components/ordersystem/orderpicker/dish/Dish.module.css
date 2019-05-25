@@ -1,6 +1,7 @@
 .dishWrapper {
   display: flex;
 
+  height: 56px;
   flex: 0 0 calc(33% - 32px);
   margin: 16px;
 }

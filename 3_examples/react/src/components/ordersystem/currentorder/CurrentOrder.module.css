@@ -1,0 +1,33 @@
+.currentOrderWrapper {
+  height: 54px;
+
+  border-top: 1px dashed #a239ca;
+  padding-top: 8px;
+  display: flex;
+}
+
+.submitButton {
+  color: #e2e2e2;
+  flex: 0 0 54px;
+  background-color: #a239ca;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.7rem;
+
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.submitButton:disabled {
+  cursor: auto;
+  opacity: 0.5;
+}
+
+.orderTotal {
+  flex: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

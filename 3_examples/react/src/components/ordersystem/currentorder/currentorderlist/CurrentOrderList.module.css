@@ -1,0 +1,31 @@
+.ordersList {
+  flex: 1 1;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.noOrders {
+  margin-left: 32px;
+  font-size: 1.5rem;
+}
+
+.orderItem {
+  display: flex;
+  border-right: 1px dashed #a239ca;
+  padding-right: 8px;
+}
+
+.orderItemCount {
+  font-size: 1.5rem;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orderItemDetails {
+  display: flex;
+  flex-direction: column;
+}

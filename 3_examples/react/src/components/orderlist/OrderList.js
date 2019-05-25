@@ -1,13 +1,13 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 
-import Card from '../card/Card'
+import Card from '../shared/card/Card'
 
 import { ORDERS } from '../../apollo/queries'
-import Spinner from '../spinner/Spinner'
+import Spinner from '../shared/spinner/Spinner'
 
 import css from './OrderList.module.css'
-import Error from '../error/Error'
+import Error from '../shared/error/Error'
 
 const ListLoading = () => (
   <div className={css.listLoading}>
