@@ -1,0 +1,58 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Dish {
+  id: Int!
+  ingredients: [Ingredient!]
+  name: String!
+  price: Int!
+}
+
+type Ingredient {
+  allergens: [String!]!
+  id: Int!
+  marketPrice: Float
+  name: String!
+}
+
+type Mutation {
+  markDelivered(orderId: String!): Receipt!
+  order(dishes: [Order!]!): Receipt!
+}
+
+type Query {
+  dish(dishId: Int!): Dish
+  dishes: [Dish!]!
+  ingredients(orderBy: OrderByEnum): [Ingredient!]!
+  orders: [Receipt!]!
+}
+
+type Receipt {
+  delivered: String
+  delivery: String!
+  id: String!
+  items: [Dish!]!
+}
+
+enum CacheControlScope {
+  PRIVATE
+  PUBLIC
+}
+
+enum OrderByEnum {
+  NAME
+  PRICE
+}
+
+input Order {
+  dishId: Int!
+  quantity: Int!
+}
+
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
