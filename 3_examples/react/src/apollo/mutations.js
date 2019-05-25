@@ -7,3 +7,9 @@ export const SUBMIT_ORDER = gql`
     }
   }
 `
+
+export const MARK_DELIVERED = gql`
+  mutation MarkOrderDelivered($orderId: String!) {
+    markDelivered(orderId: $orderId)
+  }
+`

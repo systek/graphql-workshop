@@ -19,11 +19,35 @@ const database = {
       id: 101,
       name: "Sushi 16 pieces",
       price: 89.0
+    },
+    {
+      id: 102,
+      name: "Sashimi Only",
+      price: 129.0
+    },
+    {
+      id: 103,
+      name: "Maki Town 1",
+      price: 59.0
+    },
+    {
+      id: 104,
+      name: "Tempered Tempura",
+      price: 220
+    },
+    {
+      id: 105,
+      name: "One Man Party Platter (38 pieces)",
+      price: 429
     }
   ],
   ingredients: {
     100: [ingredients[0], ingredients[2]],
     101: [ingredients[5]],
+    102: [ingredients[5]],
+    103: [ingredients[5]],
+    104: [ingredients[5]],
+    105: [ingredients[5]]
   },
   orders: []
 };
@@ -48,6 +72,20 @@ function addOrder(order) {
   database.orders.push(order);
 }
 
+function markAsDelivered(orderId) {
+  console.log(`Marking order ${orderId} as delivered`);
+
+  const orderToUpdateIndex = database.orders.findIndex(
+    order => order.orderId === orderId
+  );
+
+  if (orderToUpdateIndex === -1) {
+    throw new Error("Order does not exist");
+  }
+
+  database.orders[orderToUpdateIndex].delivered = new Date().toISOString();
+}
+
 function getOrders() {
   console.log(`Getting orders`);
   return database.orders;
@@ -62,6 +100,7 @@ module.exports = {
   getDishes,
   getDish,
   addOrder,
+  markAsDelivered,
   getOrders,
   getIngredients,
   findIngredientsInDish

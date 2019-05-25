@@ -14,6 +14,7 @@ const MutationResolver = {
     const order = {
       orderId: `${Math.random()}`,
       delivery: new Date().toISOString(),
+      delivered: null,
       items: items
     };
 
@@ -22,6 +23,13 @@ const MutationResolver = {
     console.log("Order completed");
 
     return order;
+  },
+  markDelivered: (_, { orderId }) => {
+    console.log("Mark delivered mutation received");
+
+    database.markAsDelivered(orderId);
+
+    return orderId;
   }
 };
 

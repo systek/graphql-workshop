@@ -5,6 +5,7 @@ export const ORDERS = gql`
     orders {
       orderId
       delivery
+      delivered
       items {
         id
         name
