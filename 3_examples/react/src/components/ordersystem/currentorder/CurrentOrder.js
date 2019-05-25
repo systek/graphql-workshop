@@ -8,6 +8,8 @@ import CurrentOrdersList from './currentorderlist/CurrentOrderList'
 import css from './CurrentOrder.module.css'
 import { ORDERS } from '../../../apollo/queries'
 
+const USE_CACHE_UPDATE = false
+
 const SubmitOrderButton = ({ orders, clearOrderCart }) => (
   <Mutation mutation={SUBMIT_ORDER} refetchQueries={[{ query: ORDERS }]}>
     {mutation => {
@@ -18,6 +20,29 @@ const SubmitOrderButton = ({ orders, clearOrderCart }) => (
 
       const submit = () => {
         mutation({
+          optimisticResponse: {
+            order: {
+              delivered: null,
+              delivery: '2019-05-25T15:14:49.788Z',
+              id: '0.05335812229964887',
+              __typename: 'Receipt',
+            },
+          },
+          update: proxy => {
+            if (!USE_CACHE_UPDATE) return
+
+            const ordersCache = proxy.readQuery({ query: ORDERS })
+
+            ordersCache.orders.push({
+              __typename: 'Receipt',
+              id: `temporary-id-${Object.keys(orders).join('-')}`,
+              delivery: new Date().toISOString(),
+              delivered: null,
+              items: Object.values(orders).map(order => order.dish),
+            })
+
+            proxy.writeQuery({ query: ORDERS, data: ordersCache })
+          },
           variables: {
             dishes: selectedDishes,
           },

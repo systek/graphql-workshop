@@ -68,7 +68,7 @@ function getIngredients() {
 }
 
 function addOrder(order) {
-  console.log(`Adding order ${order.orderId}`);
+  console.log(`Adding order ${order.id}`);
   database.orders.push(order);
 }
 
@@ -76,7 +76,7 @@ function markAsDelivered(orderId) {
   console.log(`Marking order ${orderId} as delivered`);
 
   const orderToUpdateIndex = database.orders.findIndex(
-    order => order.orderId === orderId
+    order => order.id === orderId
   );
 
   if (orderToUpdateIndex === -1) {
@@ -84,6 +84,8 @@ function markAsDelivered(orderId) {
   }
 
   database.orders[orderToUpdateIndex].delivered = new Date().toISOString();
+
+  return database.orders[orderToUpdateIndex]
 }
 
 function getOrders() {

@@ -2,15 +2,26 @@ import React from 'react'
 import { Mutation } from 'react-apollo'
 
 import { MARK_DELIVERED } from '../../../apollo/mutations'
-import { ORDERS } from '../../../apollo/queries'
 
 import css from './OrderItem.module.css'
 
-const MarkDeliveredButton = ({ orderId }) => (
-  <Mutation mutation={MARK_DELIVERED} refetchQueries={[{ query: ORDERS }]}>
+const USE_OPTIMISTIC_RESPONSE = false
+
+const MarkDeliveredButton = ({ order }) => (
+  <Mutation mutation={MARK_DELIVERED}>
     {mutate => {
       const submit = () => {
-        mutate({ variables: { orderId } })
+        mutate({
+          optimisticResponse: USE_OPTIMISTIC_RESPONSE
+            ? {
+                markDelivered: {
+                  ...order,
+                  delivered: new Date().toISOString(),
+                },
+              }
+            : {},
+          variables: { orderId: order.id },
+        })
       }
 
       return <button onClick={submit}>Mark delivered</button>
@@ -18,12 +29,12 @@ const MarkDeliveredButton = ({ orderId }) => (
   </Mutation>
 )
 export const OrderItem = ({ order }) => (
-  <div className={css.orderItem} key={order.orderId}>
+  <div className={css.orderItem} key={order.id}>
     <div className={css.orderContent}>
-      <div className={css.orderTitle}>Order {order.orderId.slice(-6)}</div>
+      <div className={css.orderTitle}>Order {order.id.slice(-6)}</div>
       <ul>
         {order.items.map(item => (
-          <li>{item.name}</li>
+          <li key={item.name}>{item.name}</li>
         ))}
       </ul>
       <div className={css.deliveryAt}>
@@ -35,6 +46,6 @@ export const OrderItem = ({ order }) => (
         </div>
       )}
     </div>
-    {!order.delivered && <MarkDeliveredButton orderId={order.orderId} />}
+    {!order.delivered && <MarkDeliveredButton order={order} />}
   </div>
 )

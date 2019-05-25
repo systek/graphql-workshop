@@ -38,7 +38,7 @@ const schema = gql`
 
   # Represent a order in the system
   type Receipt {
-    orderId: String!
+    id: String!
     delivery: String!
     delivered: String
     items: [Dish!]!
@@ -53,7 +53,7 @@ const schema = gql`
     # Place an order, one or many orders are accepted
     order(dishes: [Order!]!): Receipt!
     # Mark order as delivered
-    markDelivered(orderId: String!): String!
+    markDelivered(orderId: String!): Receipt!
   }
 `;
 

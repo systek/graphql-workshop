@@ -27,7 +27,7 @@ const Orders = ({ title, orders, collapsedByDefault }) => {
       {!collapsed && (
         <div>
           {orders.sort(byDelivery).map(order => (
-            <OrderItem order={order} />
+            <OrderItem key={order.id} order={order} />
           ))}
         </div>
       )}
@@ -39,11 +39,9 @@ const OrderList = () => (
   <Card className={css.orderListContainer}>
     <h2>Deliveries</h2>
     <Query query={ORDERS} notifyOnNetworkStatusChange>
-      {({ loading, error, data, ...lol }) => {
+      {({ loading, error, data }) => {
         if (error) return <Error error={error} />
         if (loading) return <Spinner fullscreen />
-
-        console.log('orderlistbois', lol)
 
         const undelivered = data.orders.filter(order => order.delivered == null)
         const delivered = data.orders.filter(order => order.delivered != null)
