@@ -1,12 +1,11 @@
-package no.systek.graphqlworkshop;
+package no.systek.graphqlworkshop.storage;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
-public class RootQueryResolver implements GraphQLQueryResolver {
+@Repository
+public class PersonRepository {
 
   private static ArrayList<Person> exampleData = new ArrayList<Person>() {{
     add(new Person("Karl", "Frontend Developer"));
@@ -14,7 +13,7 @@ public class RootQueryResolver implements GraphQLQueryResolver {
     add(new Person("Ole", ".NET Developer"));
   }};
 
-  public List<Person> getDevelopers() {
+  public List<Person> getAll() {
     return exampleData;
   }
 }

@@ -1,4 +1,4 @@
-package no.systek.graphqlworkshop;
+package no.systek.graphqlworkshop.storage;
 
 public class Person {
 
