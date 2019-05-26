@@ -6,6 +6,7 @@ import no.systek.graphqlworkshop.clients.AllergensClient
 import no.systek.graphqlworkshop.clients.MarketPriceClient
 import no.systek.graphqlworkshop.storage.Ingredient
 import org.springframework.stereotype.Component
+import java.util.concurrent.CompletableFuture
 
 @ImplicitReflectionSerializer
 @Component
@@ -13,9 +14,9 @@ class IngredientResolver(
     private val marketPriceClient: MarketPriceClient,
     private val allergensClient: AllergensClient
 ) : GraphQLResolver<Ingredient> {
-    fun marketPrice(ingredient: Ingredient): Float =
-        marketPriceClient.getMarketPrice(ingredient.name).price
+    fun marketPrice(ingredient: Ingredient): CompletableFuture<Float> =
+        CompletableFuture.supplyAsync { marketPriceClient.getMarketPrice(ingredient.name).price }
 
-    fun allergens(ingredient: Ingredient): Collection<String> =
-        allergensClient.getAllergens(ingredient.name).data.allergens
+    fun allergens(ingredient: Ingredient): CompletableFuture<Collection<String>> =
+        CompletableFuture.supplyAsync { allergensClient.getAllergens(ingredient.name).data.allergens }
 }
