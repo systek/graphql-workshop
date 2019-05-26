@@ -27,6 +27,7 @@ const getMarketPrice = async (req, res) => {
   const { query } = parse(req.url, true)
   const { ingredient = undefined } = query
 
+  res.setHeader("Content-Type", "application/json")
   if (ingredient === undefined) {
     res.statusCode = 400
     res.end(JSON.stringify({ message: 'missing ingredient parameter' }))
