@@ -1,35 +1,23 @@
 package no.systek.graphqlworkshop.clients;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.net.URI;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 public class MarketPriceClient {
-  private ObjectMapper objectMapper = new ObjectMapper();
+
+  private WebClient client = WebClient.create("https://market.gql.systek.dev/price");
 
   public double getMarketPrice(String ingredient) {
+    MarketPriceResponse marketPriceResponse = client.get()
+        .uri(uriBuilder ->
+            uriBuilder.queryParam("ingredient", ingredient.toLowerCase()).build())
+        .accept(MediaType.APPLICATION_JSON)
+        .retrieve()
+        .bodyToMono(MarketPriceResponse.class)
+        .block();
 
-    URI uri;
-    try (CloseableHttpClient client = HttpClients.createDefault()) {
-      uri =
-          new URIBuilder("https://market.gql.systek.dev/price")
-              .addParameter("ingredient", ingredient.toLowerCase())
-              .build();
-
-      HttpResponse response = client.execute(new HttpGet(uri));
-      MarketPriceResponse marketPriceResponse =
-          objectMapper.readValue(response.getEntity().getContent(), MarketPriceResponse.class);
-
-      return marketPriceResponse.getPrice();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return -1;
-    }
+    return marketPriceResponse == null ? -1 : marketPriceResponse.getPrice();
   }
 }
