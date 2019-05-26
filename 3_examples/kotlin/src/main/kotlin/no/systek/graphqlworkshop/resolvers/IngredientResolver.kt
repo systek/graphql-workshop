@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component
 @ImplicitReflectionSerializer
 @Component
 class IngredientResolver(
-        private val marketPriceClient: MarketPriceClient,
-        private val allergensClient: AllergensClient
+    private val marketPriceClient: MarketPriceClient,
+    private val allergensClient: AllergensClient
 ) : GraphQLResolver<Ingredient> {
     fun marketPrice(ingredient: Ingredient): Float =
-            marketPriceClient.getMarketPrice(ingredient.name).price
+        marketPriceClient.getMarketPrice(ingredient.name).price
 
     fun allergens(ingredient: Ingredient): Collection<String> =
-            allergensClient.getAllergens(ingredient.name).data.allergens
+        allergensClient.getAllergens(ingredient.name).data.allergens
 }

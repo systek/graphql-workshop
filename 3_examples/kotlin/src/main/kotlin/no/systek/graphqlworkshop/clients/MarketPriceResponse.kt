@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MarketPriceResponse(
-        val name: String,
-        val price: Float
+    val name: String,
+    val price: Float
 )

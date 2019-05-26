@@ -12,26 +12,26 @@ class MarketPriceClient {
     fun getMarketPrice(ingredient: String): MarketPriceResponse {
         var marketPriceDto: MarketPriceResponse? = null
         "https://market.gql.systek.dev/price"
-                .httpGet(listOf("ingredient" to ingredient.toLowerCase()))
-                .also { println("Requesting price for $ingredient") }
-                .responseObject<MarketPriceResponse> { request, response, result ->
-                    when (result) {
-                        is Result.Failure
-                        -> {
-                            if (response.statusCode == 200) {
-                                println("No price found for $ingredient")
-                                marketPriceDto = MarketPriceResponse(ingredient, -1f)
-                            } else {
-                                println("Error extracting marketprice for $ingredient")
-                                throw result.getException()
-                            }
-                        }
-                        is Result.Success -> {
-                            marketPriceDto = result.value
-                            println("Market price for $ingredient: ${result.value.price}")
+            .httpGet(listOf("ingredient" to ingredient.toLowerCase()))
+            .also { println("Requesting price for $ingredient") }
+            .responseObject<MarketPriceResponse> { request, response, result ->
+                when (result) {
+                    is Result.Failure
+                    -> {
+                        if (response.statusCode == 200) {
+                            println("No price found for $ingredient")
+                            marketPriceDto = MarketPriceResponse(ingredient, -1f)
+                        } else {
+                            println("Error extracting marketprice for $ingredient")
+                            throw result.getException()
                         }
                     }
-                }.join()
+                    is Result.Success -> {
+                        marketPriceDto = result.value
+                        println("Market price for $ingredient: ${result.value.price}")
+                    }
+                }
+            }.join()
         return marketPriceDto!!
     }
 }
