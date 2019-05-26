@@ -17,6 +17,21 @@
   padding-right: 8px;
 }
 
+@media screen and (max-width: 612px) {
+  .ordersList {
+    flex-wrap: wrap;
+  }
+
+  .orderItem {
+    flex: 1 1;
+    min-width: 200px;
+    border-right: none;
+    border-bottom: 1px dashed var(--accent);
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+  }
+}
+
 .orderItemCount {
   font-size: 1.5rem;
   width: 48px;

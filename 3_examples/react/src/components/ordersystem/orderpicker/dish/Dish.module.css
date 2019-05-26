@@ -6,6 +6,13 @@
   margin: 16px;
 }
 
+
+@media screen and (max-width: 612px) {
+  .dishWrapper {
+    flex-basis: calc(100% - 46px);
+  }
+}
+
 .dishIcon {
   width: 48px;
   height: 48px;

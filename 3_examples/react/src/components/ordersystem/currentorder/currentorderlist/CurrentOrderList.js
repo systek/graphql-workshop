@@ -14,7 +14,7 @@ const OrderItem = ({ count, dish }) => (
 
 const CurrentOrdersList = ({ orders }) => (
   <div className={css.ordersList}>
-    {orders.length === 0 && <div className={css.noOrders}>No orders</div>}
+    {orders.length === 0 && <div className={css.noOrders}>No items</div>}
     {orders.map(order => (
       <OrderItem key={order.dish.id} count={order.count} dish={order.dish} />
     ))}
