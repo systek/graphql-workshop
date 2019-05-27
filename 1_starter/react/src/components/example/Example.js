@@ -13,11 +13,12 @@ const exampleQuery = gql`
 
 const Example = () => (
   <Query query={exampleQuery}>
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
+    {(props) => {
+      console.log(props)
+      if (props.loading) return <p>Loading...</p>;
+      if (props.error) return <p>Error :(</p>;
 
-      return data.ingredients.map(({ id, name }) => (
+      return props.data.ingredients.map(({ id, name }) => (
         <div key={id}>
           <p>
             {id}: {name}
