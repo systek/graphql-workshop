@@ -218,3 +218,129 @@ The syntax for parameters in mutations can also be used in queries. Often used f
 
 ## 4 Updating the apollo-cache manually
 
+Everything fetched and updated through the apollo client is stored in an apollo cache.
+
+So far we have created a component that lists out all orders in the system, as well as a button that can add new orders. If you add a few orders, you can see that they show up in your list component if you refresh the page.
+
+To make them show up on the list automatically, there are a couple of things we can do. First, the easiest one is to simply tell apollo to fetch the `Orders` query once more after the mutation has completed, this can very easily be achieved with `refetchQueries`.
+
+```js
+const orderDishMutationWithVariables = gql`
+  mutation OrderDish($dishList: [Order!]!) {
+    order(dishes: $dishList) {
+      id
+      delivery
+    }
+  }
+`;
+
+const OrderDishButton = () => (
+  <Mutation
+    mutation={orderDishMutationWithVariables}
+    variables={{ ... }}
+    refetchQueries={[{ query: ORDERS }]}
+  >
+    ...
+  </Mutation>
+);
+```
+
+Several queries can be refetched. It's important to note that the combination of a query and it's variables is used as the key in the cache. Meaning that a refetch query with the wrong variables might not do what you think.
+
+**Task:** Add a refetch query to your mutation, observe that the list is automatically (maybe a bit slowly?) updated with your new order each time.
+
+In our case our mutation returns a complete object, the same object that is returned from the `Orders` query. In this scenario it makes sense to simply update the state manually.
+
+```js
+const orderDishMutationWithVariables = gql`
+  mutation OrderDish($dishList: [Order!]!) {
+    order(dishes: $dishList) {
+      orderId
+      delivery
+      delivered
+      items {
+        id
+        name
+        price
+      }
+    }
+  }
+`;
+
+const OrderDishButton = () => (
+  <Mutation
+    mutation={orderDishMutationWithVariables}
+    variables={{ ... }}
+    update={(proxy, { data }) => {
+      const ordersCache = proxy.readQuery({ query: ORDERS })
+
+      ordersCache.orders.push(data.order)
+
+      proxy.writeQuery({ query: ORDERS, data: ordersCache })
+    }}
+  >
+    ...
+  </Mutation>
+);
+```
+
+It's important that the object is 100% in accordance with what the query that we are updating is expecting.
+
+**Task:** Implement the update function for your mutation, to make sure it works disable `refetchQueries`, it will overwrite your manual cache updating.
+
+`update` becomes _really_ powerful when you combine it with `optimisticResponse`. Optimistic response is an object that emulates what you believe the server will respond with, if you can guess this correctly (in the happy) path, you can make it seems like the mutation is instant for the user.
+
+When you have a `optimisticResponse` and a `update`, the update function will be called **twice**. First with the shape of your `optimisticResponse` as the `{ data }` object. This cache update will then be **reverted**, and invoked again with the actual response of the server.
+
+```js
+const orderDishMutationWithVariables = gql`
+  mutation OrderDish($dishList: [Order!]!) {
+    order(dishes: $dishList) {
+      orderId
+      delivery
+      delivered
+      items {
+        id
+        name
+        price
+      }
+    }
+  }
+`;
+
+const OrderDishButton = () => (
+  <Mutation
+    mutation={orderDishMutationWithVariables}
+    variables={{ ... }}
+    optimisticResponse={{
+      order: {
+        __typename: "Receipt",
+        id: `temporary-id-${Object.keys(orders).join("-")}`,
+        delivery: new Date().toISOString(),
+        delivered: null,
+        items: Object.values(orders).map(order => order.dish)
+      }
+    }}
+    // !!!! Invoked twice, first with the data defined above
+    // !!!! That first update is then reverted, then invoked
+    // !!!! with the data from the response
+    update={(proxy, { data }) => {
+      const ordersCache = proxy.readQuery({ query: ORDERS });
+
+      ordersCache.orders.push(data.order);
+
+      proxy.writeQuery({ query: ORDERS, data: ordersCache });
+    }}
+  >
+    ...
+  </Mutation>
+);
+```
+
+If both these updates look identical to the user, the user would be none the wiser that the request _actually_ took a long time.
+
+Should the request fail, the cache update will be reverted and your cache will look like the mutation never was ran. This is a good point to show your user an error as to why the UI just jumped around a bit strangely.
+
+**Discussion** Is building the UI around the happy path a good UX? When is it good to use optimistic responses and manual cache updates?
+
+**Task:** Implement optimistic response and cache update in your new order mutation. When done, your new orders should feel instant, even if your set your chrome network throttling to "Slow 3G".

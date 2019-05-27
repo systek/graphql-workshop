@@ -6,6 +6,11 @@ export const SUBMIT_ORDER = gql`
       id
       delivery
       delivered
+      items {
+        id
+        name
+        price
+      }
     }
   }
 `

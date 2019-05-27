@@ -11,7 +11,10 @@ import css from './CurrentOrder.module.css'
 const USE_CACHE_UPDATE = false
 
 const SubmitOrderButton = ({ orders, clearOrderCart }) => (
-  <Mutation mutation={SUBMIT_ORDER} refetchQueries={[{ query: ORDERS }]}>
+  <Mutation
+    mutation={SUBMIT_ORDER}
+    refetchQueries={!USE_CACHE_UPDATE ? [{ query: ORDERS }] : []}
+  >
     {mutation => {
       const selectedDishes = Object.values(orders).map(order => ({
         dishId: order.dish.id,
@@ -22,26 +25,24 @@ const SubmitOrderButton = ({ orders, clearOrderCart }) => (
         mutation({
           optimisticResponse: {
             order: {
-              delivered: null,
-              delivery: '2019-05-25T15:14:49.788Z',
-              id: '0.05335812229964887',
-              __typename: 'Receipt',
-            },
-          },
-          update: proxy => {
-            if (!USE_CACHE_UPDATE) return
-
-            const ordersCache = proxy.readQuery({ query: ORDERS })
-
-            ordersCache.orders.push({
               __typename: 'Receipt',
               id: `temporary-id-${Object.keys(orders).join('-')}`,
               delivery: new Date().toISOString(),
               delivered: null,
               items: Object.values(orders).map(order => order.dish),
-            })
+            },
+          },
+          update: (proxy, { data }) => {
+            if (!USE_CACHE_UPDATE) return
 
-            proxy.writeQuery({ query: ORDERS, data: ordersCache })
+            const ordersCache = proxy.readQuery({ query: ORDERS })
+
+            ordersCache.orders.push(data.order)
+
+            proxy.writeQuery({
+              query: ORDERS,
+              data: ordersCache,
+            })
           },
           variables: {
             dishes: selectedDishes,
