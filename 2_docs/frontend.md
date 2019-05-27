@@ -75,7 +75,7 @@ The values we are given from the `Query` component contain everything we need, f
 }
 ```
 
-**Task:** Play around with the `Query` component to fetch some more data. Expand the component do display these values.
+🚧 **Task:** Play around with the `Query` component to fetch some more data. Expand the component do display these values.
 
 Now create a completely new component that lists out all `Orders` in the backend. Important for later!
 
@@ -138,7 +138,7 @@ mutation {
 
 Here the return value is a boolean, so the return body (`{}`) can be omitted.
 
-**Task:** Create a new component, and wrap it in a `Mutation` component. The mutation component expects a `mutation` property.
+🚧 **Task:** Create a new component, and wrap it in a `Mutation` component. The mutation component expects a `mutation` property.
 
 Example:
 
@@ -212,7 +212,7 @@ const OrderDishButton = () => (
 );
 ```
 
-**Task:** Expand the mutation component to take some input from the user (input, buttons, whatever you see fit).
+🚧 **Task:** Expand the mutation component to take some input from the user (input, buttons, whatever you see fit).
 
 The syntax for parameters in mutations can also be used in queries. Often used for filtering and sorting.
 
@@ -247,7 +247,7 @@ const OrderDishButton = () => (
 
 Several queries can be refetched. It's important to note that the combination of a query and it's variables is used as the key in the cache. Meaning that a refetch query with the wrong variables might not do what you think.
 
-**Task:** Add a refetch query to your mutation, observe that the list is automatically (maybe a bit slowly?) updated with your new order each time.
+🚧 **Task:** Add a refetch query to your mutation, observe that the list is automatically (maybe a bit slowly?) updated with your new order each time.
 
 In our case our mutation returns a complete object, the same object that is returned from the `Orders` query. In this scenario it makes sense to simply update the state manually.
 
@@ -286,7 +286,7 @@ const OrderDishButton = () => (
 
 It's important that the object is 100% in accordance with what the query that we are updating is expecting.
 
-**Task:** Implement the update function for your mutation, to make sure it works disable `refetchQueries`, it will overwrite your manual cache updating.
+🚧 **Task:** Implement the update function for your mutation, to make sure it works disable `refetchQueries`, it will overwrite your manual cache updating.
 
 `update` becomes _really_ powerful when you combine it with `optimisticResponse`. Optimistic response is an object that emulates what you believe the server will respond with, if you can guess this correctly (in the happy) path, you can make it seems like the mutation is instant for the user.
 
@@ -343,4 +343,4 @@ Should the request fail, the cache update will be reverted and your cache will l
 
 **Discussion** Is building the UI around the happy path a good UX? When is it good to use optimistic responses and manual cache updates?
 
-**Task:** Implement optimistic response and cache update in your new order mutation. When done, your new orders should feel instant, even if your set your chrome network throttling to "Slow 3G".
+🚧 **Task:** Implement optimistic response and cache update in your new order mutation. When done, your new orders should feel instant, even if your set your chrome network throttling to "Slow 3G".
