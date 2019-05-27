@@ -13,6 +13,8 @@ In this workshop you will touch on:
 5. Using optimistic responses for better user experience
 6. Configuring the apollo-client with middleware
 
+If you are stuck at any point, feel free to peek into the [full react example](/3_examples/react).
+
 ## 1. Setup
 
 In the `1_starter/react` folder, run `yarn` to install dependencies and run `yarn start` to start the create-react-app development build.
@@ -288,6 +290,8 @@ It's important that the object is 100% in accordance with what the query that we
 
 🚧 **Task:** Implement the update function for your mutation, to make sure it works disable `refetchQueries`, it will overwrite your manual cache updating.
 
+## 5. Using optimistic responses for better user experience
+
 `update` becomes _really_ powerful when you combine it with `optimisticResponse`. Optimistic response is an object that emulates what you believe the server will respond with, if you can guess this correctly (in the happy) path, you can make it seems like the mutation is instant for the user.
 
 When you have a `optimisticResponse` and a `update`, the update function will be called **twice**. First with the shape of your `optimisticResponse` as the `{ data }` object. This cache update will then be **reverted**, and invoked again with the actual response of the server.
@@ -344,3 +348,29 @@ Should the request fail, the cache update will be reverted and your cache will l
 **Discussion** Is building the UI around the happy path a good UX? When is it good to use optimistic responses and manual cache updates?
 
 🚧 **Task:** Implement optimistic response and cache update in your new order mutation. When done, your new orders should feel instant, even if your set your chrome network throttling to "Slow 3G".
+
+## 6. Configuring the apollo-client with middleware
+
+[Apollo docs: Link](https://www.apollographql.com/docs/link/)
+
+Apollo links are a very powerful middleware concepts to change how a request is handled, common use cases are
+
+- adding headers on outbound requests
+- globally (as opposed to each component) handling errors on responses
+- retrying requests
+- batching queries
+
+[List of offical links](https://www.apollographql.com/docs/link/#linkslist).
+
+🚧 **Task:** To be able to use other links, you need to use a complete setup of your apollo client, instead of the preconfigured one from `apollo-boost`. Set up a complete apollo client using [this guide](https://www.apollographql.com/docs/react/advanced/boost-migration).
+
+## End
+
+If you managed to get this far, good job!
+
+Here are some useful concepts that have not been covered in this workshop:
+
+- [Fragments](https://www.apollographql.com/docs/react/advanced/fragments)
+- [Local state management](https://www.apollographql.com/docs/react/essentials/local-state)
+- [Pagination (requires server implementation)](https://www.apollographql.com/docs/react/features/pagination)
+- [Subscriptions (requires server implementation)](https://www.apollographql.com/docs/react/advanced/subscriptions)
