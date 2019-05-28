@@ -44,7 +44,7 @@ public class QueryResolver implements GraphQLQueryResolver {
           .sorted(Comparator.comparing(ingredient -> marketPriceClient.getMarketPrice(ingredient.getName())))
           .collect(Collectors.toList());
       default:
-        throw new IllegalArgumentException("ordering operation does not exist");
+        return dataSource.getIngredients();
     }
   }
 }

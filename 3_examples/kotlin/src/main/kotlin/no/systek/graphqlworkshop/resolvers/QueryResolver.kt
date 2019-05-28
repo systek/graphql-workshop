@@ -24,10 +24,11 @@ class QueryResolver(
     fun orders(): Collection<Order> = dataSource.orders
 
     @ImplicitReflectionSerializer
-    fun ingredients(orderBy: OrderIngredientsBy): List<Ingredient> =
+    fun ingredients(orderBy: OrderIngredientsBy?): List<Ingredient> =
         when (orderBy) {
             NAME -> dataSource.ingredients.sortedBy { it.name }
             PRICE -> dataSource.ingredients
                 .sortedBy { marketPriceClient.getMarketPrice(it.name).price }
+            else -> dataSource.ingredients.toList()
         }
 }
