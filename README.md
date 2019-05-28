@@ -22,6 +22,6 @@ Get workshopping!
 
 Other resources:
 
-- Intro presentation slides: https://presentation.gql.systek.dev/
+- Presentation: https://nt.gql.systek.dev
 - GraphQL Playground of completed Node example: https://node.gql.systek.dev/
 - Completed React example, uses node backend: https://react.gql.systek.dev/
