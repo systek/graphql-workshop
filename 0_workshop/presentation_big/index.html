@@ -7,13 +7,13 @@
 
     <title>Dev Network: GraphQL og Apollo</title>
 
-    <link rel="stylesheet" href="../lib/css/reveal.css">
-    <link rel="stylesheet" href="../lib/css/theme/black.css">
+    <link rel="stylesheet" href="./lib/css/reveal.css">
+    <link rel="stylesheet" href="./lib/css/theme/black.css">
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="../lib/lib/css/zenburn.css">
+    <link rel="stylesheet" href="./lib/lib/css/zenburn.css">
 
-    <link rel="stylesheet" href="../common/css.css">
+    <link rel="stylesheet" href="./common/css.css">
 
     <style>
         .reveal .backgrounds, .reveal .slide-background {
@@ -65,7 +65,7 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? '../lib/css/print/pdf.css' : '../lib/css/print/paper.css';
+        link.href = window.location.search.match(/print-pdf/gi) ? './lib/css/print/pdf.css' : './lib/css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 </head>
@@ -325,8 +325,8 @@
 
 <img class="fixed-logo" src="systek.svg" />
 
-<script src="../lib/lib/js/head.min.js"></script>
-<script src="../lib/js/reveal.js"></script>
+<script src="./lib/lib/js/head.min.js"></script>
+<script src="./lib/js/reveal.js"></script>
 
 <script>
     // More info about config & dependencies:
@@ -342,10 +342,10 @@
         parallaxBackgroundImage: 'bg.jpg',
         backgroundTransition: 'fade',
         dependencies: [
-        { src: '../lib/plugin/markdown/marked.js' },
-        { src: '../lib/plugin/markdown/markdown.js' },
-        { src: '../lib/plugin/notes/notes.js', async: true },
-        { src: '../lib/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+        { src: './lib/plugin/markdown/marked.js' },
+        { src: './lib/plugin/markdown/markdown.js' },
+        { src: './lib/plugin/notes/notes.js', async: true },
+        { src: './lib/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
         ]
     });
 
