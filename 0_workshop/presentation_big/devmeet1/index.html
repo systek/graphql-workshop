@@ -1,0 +1,357 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Dev Network: GraphQL og Apollo</title>
+
+    <link rel="stylesheet" href="../lib/css/reveal.css">
+    <link rel="stylesheet" href="../lib/css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/lib/css/zenburn.css">
+
+    <link rel="stylesheet" href="../common/css.css">
+
+    <style>
+        .reveal .backgrounds, .reveal .slide-background {
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+            background-size: cover;
+        }
+
+        body > div > div.backgrounds > div.slide-background.stack.present > div.slide-background.present {
+            display: none !important;
+        }
+
+        .fixed-logo {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            z-index: 10000;
+            width: 200px;
+        }
+
+        .small-code pre {
+            font-size: 0.40em;
+        }
+        
+        .reveal pre {
+            font-size: 0.45em;
+            width: 49%;
+            float: left;
+        }
+
+        .reveal pre + pre {
+            width: 49%;
+            float: right;
+        }
+
+        .reveal pre:only-of-type {
+            font-size: 0.45em;
+            width: auto;
+            float: unset;
+        }
+
+        .reveal {
+            text-shadow: 2px 2px 0px black;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../lib/css/print/pdf.css' : '../lib/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section
+            data-background-video="http://mazwai.com/system/posts/videos/000/000/005/original/marc_lorenz--sky_cloudy_time-lapse.mp4"
+            data-background-video-loop="true"
+            data-background-video-muted="true"
+            data-transition="slide-in slide-out"
+        >
+            <h1>GraphQL & Apollo</h1>
+        </section>
+        <section data-transition="slide-in slide-out">
+            <h2>What is GraphQL</h2>
+            <section data-markdown>
+                ### A query language for your API
+                ### A runtime for your server
+                ###### http://graphql.org/code/#server-libraries
+                C# / .NET, Clojure, Erlang, Go, Groovy, Java, JavaScript, PHP, Python, Scala, Ruby
+            </section>
+            <section>
+                <h3>It replaces your REST-endpoints</h3>
+                <h4 class="fragment fade-in">If you want.</h4>
+            </section>
+            <section>
+                <h3>Data model agnostic</h3>
+                <p>Define your data as a graph</p>
+                <p>Define what exists, and how the data relates</p>
+                <p></p>
+            </section>
+        </section>
+        <section data-transition="slide-in slide-out">
+            <h2>Why GraphQL</h2>
+            <section>
+                <ul>
+                    <li>Clean and strong typing of your API</li>
+                    <li>Efficient - The client only get specifically what it asks for</li>
+                    <li>Let your API evolve naturally</li>
+                    <li>Normalize your data flow</li>
+                </ul>
+            </section>
+            <section data-markdown>
+                ### Clean and strong typing of your API
+                ```javascript
+                type Employee { 
+                  id: String!
+                  name: String,
+                  employeeOfTheMonth: Boolean,
+                }
+
+                type Query { 
+                  employees: [Employee]!
+                  employee(name: String!): Employee
+                }
+                ```
+                Everything has a type and you have to declare whether or not a type is nullable.
+            </section>
+            <section data-markdown>
+                ### The client only get specifically what it asks for
+                
+                ```javascript
+                // query
+                
+                query {
+                  employee(name: "karl") {
+                    employeeOfTheMonth
+                  }
+                }
+                ```
+                ```javascript
+                // response                
+                {
+                  "data": {
+                    "employee": {
+                      "employeeOfTheMonth": false
+                    }
+                  }
+                }
+                ```
+            </section>
+            <section data-markdown>
+                ### The client only get specifically what it asks for
+                
+                ```javascript
+                // query
+                
+                query {
+                  employee(navn: "karl") {
+                    employeeOfTheMonth
+                    pay {
+                      yearly
+                    }
+                  }
+                }                  
+                ```
+                ```javascript
+                // response             
+                {
+                  "data": {
+                    "employee": {
+                      "employeeOfTheMonth": false,
+                      "pay": {
+                        "yearly": 50
+                      }
+                    }
+                  }
+                }
+                ```
+            </section>
+            <section data-markdown>
+                ### The client only get specifically what it asks for
+
+                ```javascript
+                query {
+                  employee(name: "karl") {
+                    name
+                    pay { yearly } // <--- Asks for pay
+                  }
+                }                  
+                ```
+
+                - The server has defined how pay is fetched from a employee-node.
+                - Pay is only fetched when the client asks for it
+                - Node-relations can be complex and circular, GraphQL will resolve until all values are "Scalars"
+            </section>
+            <section data-markdown>
+                ### Let your API evolve naturally
+                ```javascript
+                type Employee { 
+                  id: String!
+                  name: String,
+                  employeeOfTheMonth: Boolean,
+                }
+                ```
+                ```javascript
+                type Employee { 
+                  id: String!
+                  name: String,
+                  employeeOfTheMonth: Boolean,
+                  pay: Int! // <--- New field
+                }
+                ```
+            </section>
+            <section data-markdown>
+                ### Let your API evolve naturally
+                ```javascript
+                type Employee { 
+                  id: String!
+                  name: String,
+                  employeeOfTheMonth: Boolean @deprecated(reason: "Oof this should't have been available",
+                  pay: Int!
+                }
+                ```
+            </section>
+            <section>
+                <h3>Normalize your data flow</h3>
+                <img src="graph.png" style="max-width: 50%" />
+                <div class="image-sub">Source: https://www.howtographql.com/basics/3-big-picture/</div>
+            </section>
+        </section>
+        <section data-markdown data-transition="slide-in slide-out">
+            ## GraphQL Demo: GraphiQL
+            - Like swagger, but for GraphQL
+            - http://localhost:4000/graphiql
+        </section>
+        <section data-transition="slide-in slide-out">
+            <h2>What is Apollo</h2>
+            <section data-markdown>
+                ### Simple way to consume a GraphQL API in a React application
+            </section>
+        </section>
+        <section data-transition="slide-in slide-out">
+            <h2>Why Apollo</h2>
+            <section data-markdown>
+                - Quick and easy to get started
+                - Removes a lot of the responsibilty from Redux
+                - Automatic state updates without complex reducers
+                - Familiar if you have used HoCs (redux' `connect`, react-router's `withRouter`)
+                  - Also supports "function as children"-pattern
+            </section>
+            <section data-markdown>
+                ##### Connect your component, Apollo with handle fetching, loading state and any errors that occur
+                ```javascript
+                // EmployeeList: Normal component
+
+                export default graphql(gql`
+                  query allEmployees {
+                    employees {
+                      id
+                      name
+                      employeeOfTheMonth
+                    }
+                  }
+                `)(EmployeeList);
+                ```
+                ```javascript
+                // props:
+
+                {
+                  data: {
+                    loading: false,
+                    employees: [
+                      { name: "karl", employeeOfTheMonth: false }, 
+                      ...
+                    ],
+                    error: null,
+                    refetch() { ... },
+                    ... // a lot more
+                  }
+                }
+                ```
+            </section>
+            <section data-markdown>
+                ##### Automatic updating of state
+                
+                Give your data objects a globally unique ID and apollo will automatically update the state when it recognizes.
+
+                ```javascript
+                const client = new ApolloClient({
+                    ...,
+                    dataIdFromObject: object => object.id,
+                });
+                ```
+            </section>
+            <section data-markdown>
+                ##### Manual updating of state
+                
+                Are objects added or deleted you need to manually specify how Apollo should update the state
+
+                - `update`: A function that allows you to read and write to the Apollo-cache.
+                - `refetchQueries`: Be lazy and tell Apollo to get another query again.
+            </section>
+            <section data-markdown>
+                ## Apollo Demo
+                - http://localhost:3000
+            </section>
+        </section>
+        
+        <section 
+            data-markdown 
+            data-background-video="http://mazwai.com/system/posts/videos/000/000/105/original/fotogen--clouds_over_the_mountain.mp4"
+            data-background-video-loop="true"
+            data-background-video-muted="true"            
+        >
+        ## Questions?
+
+        Source to demo:
+        
+        https://github.com/karl-run/graphql-demo
+
+    </section>
+    </div>
+</div>
+
+<img class="fixed-logo" src="systek.svg" />
+
+<script src="../lib/lib/js/head.min.js"></script>
+<script src="../lib/js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        slideNumber: false,
+        progress: true,
+        history: true,
+        transition: 'none',
+        slideNumber: 'c/t',
+        viewDistance: 3,
+        parallaxBackgroundImage: 'bg.jpg',
+        backgroundTransition: 'fade',
+        dependencies: [
+        { src: '../lib/plugin/markdown/marked.js' },
+        { src: '../lib/plugin/markdown/markdown.js' },
+        { src: '../lib/plugin/notes/notes.js', async: true },
+        { src: '../lib/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+
+    Reveal.addEventListener( 'ready', function( event ) {
+    } );
+</script>
+</body>
+
+</html>

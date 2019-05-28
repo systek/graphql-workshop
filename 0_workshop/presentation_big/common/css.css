@@ -1,0 +1,36 @@
+p code {
+  font-family: monospace;
+  font-size: 80% !important;
+  color: lightcoral;
+}
+
+.reveal pre {
+  font-size: 0.45em;
+}
+
+.reveal section img {
+  padding: 16px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.69);
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+  0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.reveal section .image-sub {
+  margin-top: -16px;
+  font-size: 12px;
+}
+
+.reveal pre code {
+  max-height: 450px;
+}
+
+.reveal .slide-number {
+  background: none !important;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  text-shadow: 2px 2px 0px black;
+  text-transform: initial;
+}
