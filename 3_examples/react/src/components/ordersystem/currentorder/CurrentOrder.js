@@ -8,12 +8,12 @@ import { SUBMIT_ORDER } from '../../../apollo/mutations'
 import CurrentOrdersList from './currentorderlist/CurrentOrderList'
 import css from './CurrentOrder.module.css'
 
-const USE_CACHE_UPDATE = false
+window.USE_CACHE_UPDATE = false
 
 const SubmitOrderButton = ({ orders, clearOrderCart }) => (
   <Mutation
     mutation={SUBMIT_ORDER}
-    refetchQueries={!USE_CACHE_UPDATE ? [{ query: ORDERS }] : []}
+    refetchQueries={!window.USE_CACHE_UPDATE ? [{ query: ORDERS }] : []}
   >
     {mutation => {
       const selectedDishes = Object.values(orders).map(order => ({
@@ -33,7 +33,7 @@ const SubmitOrderButton = ({ orders, clearOrderCart }) => (
             },
           },
           update: (proxy, { data }) => {
-            if (!USE_CACHE_UPDATE) return
+            if (!window.USE_CACHE_UPDATE) return
 
             const ordersCache = proxy.readQuery({ query: ORDERS })
 

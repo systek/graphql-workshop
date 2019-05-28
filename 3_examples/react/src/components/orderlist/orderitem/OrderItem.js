@@ -5,14 +5,14 @@ import { MARK_DELIVERED } from '../../../apollo/mutations'
 
 import css from './OrderItem.module.css'
 
-const USE_OPTIMISTIC_RESPONSE = false
+window.USE_OPTIMISTIC_RESPONSE = false;
 
 const MarkDeliveredButton = ({ order }) => (
   <Mutation mutation={MARK_DELIVERED}>
     {mutate => {
       const submit = () => {
         mutate({
-          optimisticResponse: USE_OPTIMISTIC_RESPONSE
+          optimisticResponse: window.USE_OPTIMISTIC_RESPONSE
             ? {
                 markDelivered: {
                   ...order,

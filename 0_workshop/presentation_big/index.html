@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Dev Network: GraphQL og Apollo</title>
+    <title>GraphQL & Apollo</title>
 
     <link rel="stylesheet" href="./lib/css/reveal.css">
     <link rel="stylesheet" href="./lib/css/theme/black.css">
@@ -83,11 +83,11 @@
         </section>
         <section data-transition="slide-in slide-out">
             <h2>What is GraphQL</h2>
-            <section data-markdown>
-                ### A query language for your API
-                ### A runtime for your server
-                ###### http://graphql.org/code/#server-libraries
-                C# / .NET, Clojure, Erlang, Go, Groovy, Java, JavaScript, PHP, Python, Scala, Ruby
+            <section>
+              <h2>A query language for your API</h2>
+              <h2 class="fragment fade-in">A runtime for your server</h2>
+              <p class="fragment fade-in">C# / .NET, Clojure, Erlang, Go, Groovy, Java, JavaScript, PHP, Python, Scala, Ruby</p>
+              <a class="fragment fade-in" href="http://graphql.org/code/#server-libraries" target="_blank">http://graphql.org/code/#server-libraries</a>
             </section>
             <section>
                 <h3>It replaces your REST-endpoints</h3>
@@ -103,11 +103,12 @@
         <section data-transition="slide-in slide-out">
             <h2>Why GraphQL</h2>
             <section>
+              <p>Simplify your workflow</p>
                 <ul>
-                    <li>Clean and strong typing of your API</li>
-                    <li>Efficient - The client only get specifically what it asks for</li>
-                    <li>Let your API evolve naturally</li>
-                    <li>Normalize your data flow</li>
+                    <li class="fragment fade-in">Clean and strong typing of your API</li>
+                    <li class="fragment fade-in">Efficient - Clients only get what they ask for</li>
+                    <li class="fragment fade-in">Build generic APIs that evolve naturally</li>
+                    <li class="fragment fade-in">Normalize your data flow</li>
                 </ul>
             </section>
             <section data-markdown>
@@ -127,7 +128,7 @@
                 Everything has a type and you have to declare whether or not a type is nullable.
             </section>
             <section data-markdown>
-                ### The client only get specifically what it asks for
+                ### Clients only get what they ask for
                 
                 ```javascript
                 // query
@@ -150,7 +151,7 @@
                 ```
             </section>
             <section data-markdown>
-                ### The client only get specifically what it asks for
+                ### Clients only get what they ask for
                 
                 ```javascript
                 // query
@@ -178,36 +179,39 @@
                 }
                 ```
             </section>
-            <section data-markdown>
-                ### The client only get specifically what it asks for
+            <section>
+              <h3>Clients only get what they ask for</h3>
 
-                ```javascript
-                query {
-                  employee(name: "karl") {
-                    name
-                    pay { yearly } // <--- Asks for pay
+              <pre style="box-shadow: none;">
+                <code data-trim data-noescap>
+                  query {
+                    employee(name: "karl") {
+                      name
+                      pay { yearly } // <--- Asks for pay
+                    }
                   }
-                }                  
-                ```
-
-                - The server has defined how pay is fetched from a employee-node.
-                - Pay is only fetched when the client asks for it
-                - Node-relations can be complex and circular, GraphQL will resolve until all values are "Scalars"
+                </code>
+              </pre>
+              <ul>
+                <li class="fragment fade-in">Given an employee node, the pay property is resolved</li>
+                <li class="fragment fade-in">Pay is only fetched when the client asks for it</li>
+                <li class="fragment fade-in">Node-relations can be complex and circular, GraphQL will resolve until all values are "Scalars"</li>
+              </ul>
             </section>
             <section data-markdown>
                 ### Let your API evolve naturally
                 ```javascript
                 type Employee { 
                   id: String!
-                  name: String,
-                  employeeOfTheMonth: Boolean,
+                  name: String
+                  employeeOfTheMonth: Boolean
                 }
                 ```
                 ```javascript
                 type Employee { 
                   id: String!
-                  name: String,
-                  employeeOfTheMonth: Boolean,
+                  name: String
+                  employeeOfTheMonth: Boolean
                   pay: Int! // <--- New field
                 }
                 ```
@@ -217,12 +221,17 @@
                 ```javascript
                 type Employee { 
                   id: String!
-                  name: String,
-                  employeeOfTheMonth: Boolean @deprecated(reason: "Oof this should't have been available",
+                  name: String
+                  employeeOfTheMonth: Boolean @deprecated(reason: "No longer available")
                   pay: Int!
                 }
                 ```
             </section>
+          <section>
+            <h3>Normalize your data flow</h3>
+            <p>Clients relate to a single graph</p>
+            <p>Abstracted away from complex integrations</p>
+          </section>
             <section>
                 <h3>Normalize your data flow</h3>
                 <img src="graph.png" style="max-width: 50%" />
@@ -230,27 +239,33 @@
             </section>
         </section>
         <section data-markdown data-transition="slide-in slide-out">
-            ## GraphQL Demo: GraphiQL
+            ## GraphQL Demo: GraphQL Playground
             - Like swagger, but for GraphQL
-            - http://localhost:4000/graphiql
+            - http://node.gql.systek.dev
         </section>
         <section data-transition="slide-in slide-out">
             <h2>What is Apollo</h2>
             <section data-markdown>
-                ### Simple way to consume a GraphQL API in a React application
+                ### Simple way to consume a GraphQL API
             </section>
         </section>
         <section data-transition="slide-in slide-out">
             <h2>Why Apollo</h2>
-            <section data-markdown>
-                - Quick and easy to get started
-                - Removes a lot of the responsibilty from Redux
-                - Automatic state updates without complex reducers
-                - Familiar if you have used HoCs (redux' `connect`, react-router's `withRouter`)
-                  - Also supports "function as children"-pattern
+            <section>
+              <p>Improves your dev experience</p>
+              <ul>
+              <li class="fragment fade-in">Quick and easy to get started</li>
+              <li class="fragment fade-in">Removes a lot of the responsibilty from Redux</li>
+              <li class="fragment fade-in">Automatic state updates without complex reducers</li>
+              <li class="fragment fade-in">Familiar if you have used HoCs (redux' connect, react-router's withRouter)</li>
+                <ul>
+                  <li class="fragment fade-in">Also supports "function as children"-pattern</li>
+                  <li class="fragment fade-in">React hooks around the corner</li>
+                </ul>
+              </ul>
             </section>
             <section data-markdown>
-                ##### Connect your component, Apollo with handle fetching, loading state and any errors that occur
+                ##### Connect your component, Apollo will handle fetching, loading state and any errors that occur
                 ```javascript
                 // EmployeeList: Normal component
 
@@ -284,7 +299,7 @@
             <section data-markdown>
                 ##### Automatic updating of state
                 
-                Give your data objects a globally unique ID and apollo will automatically update the state when it recognizes.
+                Give your data objects a globally unique ID and apollo will automatically update the state
 
                 ```javascript
                 const client = new ApolloClient({
@@ -303,7 +318,7 @@
             </section>
             <section data-markdown>
                 ## Apollo Demo
-                - http://localhost:3000
+                - https://react.gql.systek.dev
             </section>
         </section>
         
