@@ -33,6 +33,35 @@
           }
         }
       }
+    },
+    "/price/{ingredients}": {
+      "get": {
+        "description": "Returns all market prices for a given list of ingredients",
+        "operationId": "price",
+        "parameters": [
+          {
+            "name": "ingredients",
+            "in": "query",
+            "description": "comma separated list of ingredients to find market price for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "market price",
+            "schema": {
+              "$ref": "#/definitions/Price"
+            }
+          },
+          "400": {
+            "description": "missing parameter",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

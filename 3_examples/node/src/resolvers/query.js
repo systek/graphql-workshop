@@ -18,7 +18,7 @@ const QueryResolvers = {
     return database.getOrders();
   },
   ingredients: async (_, { orderBy }) => {
-    const ingredients = database.getIngredients();
+    const ingredients = await database.getIngredients();
 
     if (orderBy === "NAME") {
       console.log("Ordering by name");

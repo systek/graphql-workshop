@@ -23,16 +23,24 @@ const MarketPrice = mongoose.model(
   }),
 )
 
-const getMarketPrice = async (req, res) => {
+const handleRequest = async (req, res) => {
   const { query } = parse(req.url, true)
-  const { ingredient = undefined } = query
+  const { ingredient = undefined, ingredients = undefined } = query
 
-  res.setHeader("Content-Type", "application/json")
-  if (ingredient === undefined) {
+  if (ingredient !== undefined) {
+    await getMarketPrice(ingredient, res)
+  } else if (ingredients !== undefined) {
+    await getMarketPrices(ingredients, res)
+  } else {
     res.statusCode = 400
-    res.end(JSON.stringify({ message: 'missing ingredient parameter' }))
+    res.end(JSON.stringify({ message: 'no valid parameters supplied' }))
   }
+}
 
+
+const getMarketPrice = async (ingredient, res) => {
+
+  res.setHeader('Content-Type', 'application/json')
   let result
   try {
     result = await MarketPrice.findOne({ ingredient: ingredient })
@@ -57,12 +65,41 @@ const getMarketPrice = async (req, res) => {
   }
 }
 
-module.exports = getMarketPrice
+const getMarketPrices = async (ingredients, res) => {
+  const ingredientsArray = ingredients.split(',');
+
+  res.setHeader('Content-Type', 'application/json')
+  let result
+  try {
+    result = await MarketPrice.find({ ingredient: { $in: ingredientsArray } })
+  } catch (e) {
+    res.statusCode = 500
+    res.end(
+      JSON.stringify({
+        message: 'Error during communication with data source',
+      }),
+    )
+    return
+  }
+
+  if (result === null) {
+    res.end(JSON.stringify({}))
+  } else {
+    res.end(
+      JSON.stringify(result.map(item => ({
+        ingredient: item.ingredient,
+        price: item.price,
+      }))),
+    )
+  }
+}
+
+module.exports = handleRequest
 
 if (!process.env.IS_NOW) {
   const http = require('http')
   const app = http.createServer((req, res) => {
-    getMarketPrice(req, res)
+    handleRequest(req, res)
   })
 
   app.listen(3000, () =>

@@ -190,3 +190,7 @@ Dish has an integer ID, a name, a price. It should also be extended to resolve a
 #### `Ingredient`
 
 Ingredient has an integer ID and a name. It shall also be extended to have two externally resolveable variables. "Market price" and "allergens" (which is a list). The shape of these objects you can chose your self, based on what the API provides.
+
+## End
+
+If you managed to get this far, good job! Want an extra challenge? Try enabling batch fetching of orders through the use of [DataLoaders](https://github.com/graphql/dataloader). The price and ingredients services provide separate endpoints/resolvers for batched fetching of data. 

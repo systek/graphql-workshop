@@ -3,7 +3,7 @@ const { Schema } = mongoose
 
 const uri = `mongodb+srv://${process.env.MONGODB_USER}:${
   process.env.MONGODB_PASSWORD
-}@cluster0-83mfa.mongodb.net/gqlworkshop?retryWrites=true`
+  }@cluster0-83mfa.mongodb.net/gqlworkshop?retryWrites=true`
 
 mongoose
   .connect(uri, { useNewUrlParser: true })
@@ -32,6 +32,19 @@ const lookupAllergens = async ingredient => {
   }
 }
 
+const lookupAllergensIn = async ingredients => {
+  const result = await Allergen.find({ ingredient: { $in: ingredients } })
+
+  if (result === null) {
+    return []
+  } else {
+    return result.map(item => ({
+      name: item.ingredient,
+      allergens: item.allergens
+    }))
+  }
+}
+
 const lookupFoods = async () => {
   const result = await Allergen.find({})
 
@@ -49,6 +62,10 @@ const Queryresolvers = {
   allergens: (_, { ingredient }) => {
     console.log(`Query resolver: allergen(${ingredient})`)
     return lookupAllergens(ingredient)
+  },
+  allergensIn: (_, { ingredients }) => {
+    console.log(`Query resolver: allergensIn(${ingredients})`)
+    return lookupAllergensIn(ingredients)
   },
   foods: () => {
     console.log(`Query resolver: foods()`)

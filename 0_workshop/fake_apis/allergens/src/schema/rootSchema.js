@@ -8,6 +8,7 @@ const typeDefs = gql`
 
     type Query {
         allergens(ingredient: String!): [String]!
+        allergensIn(ingredients: [String!]!): [Food!]!
         foods: [Food!]!
     }
 `;
