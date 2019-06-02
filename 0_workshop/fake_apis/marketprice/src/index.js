@@ -85,12 +85,12 @@ const getMarketPrices = async (ingredients, res) => {
   if (result === null) {
     res.end(JSON.stringify({}))
   } else {
-    res.end(
-      JSON.stringify(result.map(item => ({
+    res.end({
+      data: JSON.stringify(result.map(item => ({
         ingredient: item.ingredient,
         price: item.price,
-      }))),
-    )
+      })))
+    })
   }
 }
 

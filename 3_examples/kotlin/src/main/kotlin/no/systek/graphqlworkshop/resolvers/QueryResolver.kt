@@ -1,6 +1,7 @@
 package no.systek.graphqlworkshop.resolvers
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
+import graphql.schema.DataFetchingEnvironment
 import kotlinx.serialization.ImplicitReflectionSerializer
 import no.systek.graphqlworkshop.clients.MarketPriceClient
 import no.systek.graphqlworkshop.storage.DataSource
@@ -24,11 +25,13 @@ class QueryResolver(
     fun orders(): Collection<Order> = dataSource.orders
 
     @ImplicitReflectionSerializer
-    fun ingredients(orderBy: OrderIngredientsBy?): List<Ingredient> =
-        when (orderBy) {
+    fun ingredients(orderBy: OrderIngredientsBy?, dfe: DataFetchingEnvironment): List<Ingredient> {
+        val batchedMarketPrice = marketPriceClient.getBatchedMarketPrice(dataSource.ingredients.toSet())
+        return when (orderBy) {
             NAME -> dataSource.ingredients.sortedBy { it.name }
             PRICE -> dataSource.ingredients
-                .sortedBy { marketPriceClient.getMarketPrice(it.name).price }
+                .sortedBy { batchedMarketPrice[it] }
             else -> dataSource.ingredients.toList()
         }
+    }
 }
