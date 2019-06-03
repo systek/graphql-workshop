@@ -1,12 +1,12 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 
-import Card from '../shared/card/Card'
 import { ORDERS } from '../../apollo/queries'
+import Card from '../shared/card/Card'
 import Spinner from '../shared/spinner/Spinner'
 import Error from '../shared/error/Error'
 
-import { OrderItem } from './orderitem/OrderItem'
+import OrderItem from './orderitem/OrderItem'
 import css from './OrderList.module.css'
 
 const byDelivery = (a, b) => b.delivery.localeCompare(a.delivery)
