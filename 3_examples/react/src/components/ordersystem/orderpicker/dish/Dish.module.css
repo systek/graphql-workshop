@@ -32,6 +32,10 @@
   flex: 1 1;
 }
 
+.dishDetails > div:first-child {
+  overflow: hidden;
+}
+
 .priceDetails {
   display: flex;
 }

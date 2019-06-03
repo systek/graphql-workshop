@@ -1,0 +1,23 @@
+.demoFlags {
+  display: flex;
+  opacity: 0;
+  transition: opacity 270ms ease-in-out;
+
+  margin-right: 16px;
+}
+
+.demoFlags:hover {
+  opacity: 1;
+}
+
+.toggleWithLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggleWithLabel > div:first-child {
+  font-size: 0.7rem;
+  margin-right: 4px;
+  margin-left: 16px;
+}

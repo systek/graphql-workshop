@@ -3,6 +3,7 @@ import DarkTheme, { applyTheme } from 'react-dark-theme'
 
 import Cart from './stats/Stats'
 import css from './Header.module.css'
+import DemoFlags from '../../context/DemoFlags'
 
 const normalTheme = {
   background: '#d8e1e4',
@@ -24,6 +25,7 @@ const Header = () => (
   <header className={css.header}>
     <h1>Sushi Shop System</h1>
     <div className={css.themeWrapper}>
+      <DemoFlags />
       <DarkTheme defaultDark light={normalTheme} dark={darkTheme} />
     </div>
     <Cart />

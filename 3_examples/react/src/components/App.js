@@ -1,6 +1,7 @@
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 
+import { FlagsProvider } from '../context/DemoFlags'
 import client from '../apollo/client'
 
 import Header from './header/Header'
@@ -10,13 +11,15 @@ import OrderList from './orderlist/OrderList'
 import css from './App.module.css'
 
 const App = () => (
-  <ApolloProvider client={client}>
-    <Header />
-    <div className={css.appContainer}>
-      <OrderSystem />
-      <OrderList />
-    </div>
-  </ApolloProvider>
+  <FlagsProvider>
+    <ApolloProvider client={client}>
+      <Header />
+      <div className={css.appContainer}>
+        <OrderSystem />
+        <OrderList />
+      </div>
+    </ApolloProvider>
+  </FlagsProvider>
 )
 
 export default App
