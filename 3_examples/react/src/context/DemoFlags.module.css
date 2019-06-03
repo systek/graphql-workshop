@@ -23,7 +23,9 @@
 }
 
 .toggleWithLabel > div:first-child {
+  text-align: right;
   font-size: 0.7rem;
+  min-width: 68px;
   margin-right: 4px;
   margin-left: 16px;
 }

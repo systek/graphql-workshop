@@ -49,21 +49,21 @@ const DemoFlags = () => {
   return (
     <div className={css.demoFlags}>
       <div className={css.toggleWithLabel}>
-        <div>Update cache</div>
+        <div>Cache update orders</div>
         <Toggle
           checked={flags.useCacheUpdate}
           onChange={flags.toggleCacheUpdate}
         />
       </div>
       <div className={css.toggleWithLabel}>
-        <div>Update cache & optimistic</div>
+        <div>Optimistic orders</div>
         <Toggle
           checked={flags.useCacheUpdateAndOptimistic}
           onChange={flags.toggleCacheUpdateAndOptimistic}
         />
       </div>
       <div className={css.toggleWithLabel}>
-        <div>Optimistic response</div>
+        <div>Optimistic deliveries</div>
         <Toggle
           checked={flags.useOptimisticResponse}
           onChange={flags.toggleOptimistic}
