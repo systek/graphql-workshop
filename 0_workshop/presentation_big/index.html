@@ -94,10 +94,14 @@
                 <h4 class="fragment fade-in">If you want.</h4>
             </section>
             <section>
+              <h3>Simple concept</h3>
+              <p>You provide a schema - The shape of your API</p>
+              <p>You implement resolvers to match this schema - A very thin layer</p>
+            </section>
+            <section>
                 <h3>Data model agnostic</h3>
                 <p>Define your data as a graph</p>
                 <p>Define what exists, and how the data relates</p>
-                <p></p>
             </section>
         </section>
         <section data-transition="slide-in slide-out">
@@ -193,7 +197,7 @@
                 </code>
               </pre>
               <ul>
-                <li class="fragment fade-in">Given an employee node, the pay property is resolved</li>
+                <li class="fragment fade-in">Given an employee, the pay property is resolved</li>
                 <li class="fragment fade-in">Pay is only fetched when the client asks for it</li>
                 <li class="fragment fade-in">Node-relations can be complex and circular, GraphQL will resolve until all values are "Scalars"</li>
               </ul>
