@@ -84,7 +84,7 @@
         <section data-transition="slide-in slide-out">
             <h2>What is GraphQL</h2>
             <section>
-              <h2>A query language for your API</h2>
+              <h2 class="fragment fade-in">A query language for your API</h2>
               <h2 class="fragment fade-in">A runtime for your server</h2>
               <p class="fragment fade-in">C# / .NET, Clojure, Erlang, Go, Groovy, Java, JavaScript, PHP, Python, Scala, Ruby</p>
               <a class="fragment fade-in" href="http://graphql.org/code/#server-libraries" target="_blank">http://graphql.org/code/#server-libraries</a>
@@ -239,14 +239,17 @@
             </section>
         </section>
         <section data-markdown data-transition="slide-in slide-out">
-            ## GraphQL Demo: GraphQL Playground
+            # Demo
+            ## GraphQL Playground
             - Like swagger, but for GraphQL
             - http://node.gql.systek.dev
         </section>
         <section data-transition="slide-in slide-out">
-            <h2>What is Apollo</h2>
+            <h2>Apollo</h2>
             <section data-markdown>
                 ### Simple way to consume a GraphQL API
+
+                Handles fetching, caching and updating of data.
             </section>
         </section>
         <section data-transition="slide-in slide-out">
@@ -260,7 +263,7 @@
               <li class="fragment fade-in">Familiar if you have used HoCs (redux' connect, react-router's withRouter)</li>
                 <ul>
                   <li class="fragment fade-in">Also supports "function as children"-pattern</li>
-                  <li class="fragment fade-in">React hooks around the corner</li>
+                  <li class="fragment fade-in">Hooks around the corner</li>
                 </ul>
               </ul>
             </section>
@@ -311,10 +314,10 @@
             <section data-markdown>
                 ##### Manual updating of state
 
-                Are objects added or deleted you need to manually specify how Apollo should update the state
+                Objects that are not recognised in the cache can be updated with either
 
-                - `update`: A function that allows you to read and write to the Apollo-cache.
                 - `refetchQueries`: Be lazy and tell Apollo to get another query again.
+                - `update`: A function that allows you to read and write to the Apollo-cache.
             </section>
             <section data-markdown>
                 ## Apollo Demo
@@ -322,7 +325,8 @@
             </section>
         </section>
         <section data-transition="slide-in slide-out">
-            <h2>N + 1</h2>
+          <h1>Dataloaders</h1>
+          <h2>N + 1</h2>
             <section data-transition="slide-in">
                 <p class="fragment fade-in">
                     N + 1 is a general term used in ORM to describe a situation where loading a single object graph takes N + 1 SQL queries
@@ -584,7 +588,6 @@
             <h2>DataLoader - batching & caching</h2>
             <img src="lib/img/graphql-dataloader.svg" alt="dataloader" >
         </section>
-
         <section
             data-markdown
             data-background-video="http://mazwai.com/system/posts/videos/000/000/105/original/fotogen--clouds_over_the_mountain.mp4"
@@ -618,7 +621,7 @@
         transition: 'none',
         slideNumber: 'c/t',
         viewDistance: 3,
-        parallaxBackgroundImage: 'bg.jpg',
+        parallaxBackgroundImage: 'bg2.jpg',
         backgroundTransition: 'fade',
         dependencies: [
         { src: './lib/plugin/markdown/marked.js' },
