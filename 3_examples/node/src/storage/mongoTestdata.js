@@ -7,13 +7,14 @@ const ingredients = [
   { id: 6, name: "Saffron" }
 ];
 
+// PS: Don't do this. This is relational data 😂
 const ingredientsMap = {
-  100: [ingredients[0], ingredients[2]],
-  101: [ingredients[5]],
-  102: [ingredients[5]],
-  103: [ingredients[5]],
-  104: [ingredients[5]],
-  105: [ingredients[5]]
+  100: [1, 3],
+  101: [2],
+  102: [3, 2],
+  103: [4, 5],
+  104: [5, 4, 3],
+  105: [6, 2, 4, 2]
 };
 
 const dishes = [
@@ -25,12 +26,26 @@ const dishes = [
   { id: "105", name: "One Man Party Platter (38 pieces)", price: 429 }
 ];
 
-const insertTestData = (DishModel, OrderModel, IngredientsModel) => {
+const insertTestData = (
+  DishModel,
+  OrderModel,
+  IngredientsModel,
+  DishToIngredientMapModel
+) => {
   console.warn("Inserting test data");
 
   if (IngredientsModel) {
     ingredients.forEach(ingredient => {
       new IngredientsModel(ingredient).save();
+    });
+  }
+
+  if (DishToIngredientMapModel) {
+    Object.keys(ingredientsMap).forEach(key => {
+      new DishToIngredientMapModel({
+        id: key,
+        ingredients: ingredientsMap[key]
+      }).save();
     });
   }
 

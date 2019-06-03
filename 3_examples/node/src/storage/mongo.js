@@ -25,6 +25,14 @@ const Ingredient = model(
   })
 );
 
+const DishToIngredientMap = model(
+  "dishToIngredientMap",
+  new Schema({
+    id: String,
+    ingredients: [String]
+  })
+);
+
 const Dish = model(
   "dish",
   new Schema({
@@ -51,7 +59,7 @@ const Order = model(
 );
 
 if (process.env.INSERT_DATA) {
-  insertTestData(Dish, Order, Ingredient);
+  insertTestData(Dish, Order, Ingredient, DishToIngredientMap);
 }
 
 const getDishes = async () => {
@@ -73,7 +81,9 @@ const getDish = async id => {
 const getIngredients = async () => {
   console.log(`Getting all ingredients`);
 
-  return Ingredient.find({});
+  const ingredients = await Ingredient.find({}).lean();
+
+  return ingredients;
 };
 
 const addOrder = async order => {
@@ -101,16 +111,25 @@ const markAsDelivered = async orderId => {
 const getOrders = async () => {
   console.log(`Getting orders`);
 
-  const orders = await Order.find({});
+  const orders = await Order.find({}).lean();
 
   return orders;
 };
 
-function findIngredientsInDish(dishId) {
+const findIngredientsInDish = async dishId => {
   console.log("Getting ingredinents for dish", dishId);
-  // return database.ingredients[dishId];
-  return [];
-}
+
+  // Don't do this at home! Doing relational data (like this) in mongodb is
+  // not going to be good for performance.
+  const ingredientsForDish = await DishToIngredientMap.findOne({
+    id: dishId
+  }).lean();
+  const ingredients = await Ingredient.find({
+    id: { $in: ingredientsForDish.ingredients }
+  }).lean();
+
+  return ingredients;
+};
 
 module.exports = {
   getDishes,

@@ -23,7 +23,7 @@ const QueryResolvers = {
     if (orderBy === "NAME") {
       console.log("Ordering by name");
 
-      return ingredients.sort((a, b) => a.name > b.name);
+      return ingredients.sort((a, b) => a.name.localeCompare(b.name));
     } else if (orderBy === "PRICE") {
       console.log(
         "Ordering by price (looking up every item twice because of resolving)"
@@ -40,7 +40,7 @@ const QueryResolvers = {
         )
       );
 
-      return ingredientsWithPrice.sort((a, b) => a.marketPrice < b.marketPrice);
+      return ingredientsWithPrice.sort((a, b) => b.marketPrice - a.marketPrice);
     } else {
       return ingredients;
     }
