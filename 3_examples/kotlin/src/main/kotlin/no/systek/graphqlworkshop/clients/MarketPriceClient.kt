@@ -42,7 +42,7 @@ class MarketPriceClient {
         "https://market.gql.systek.dev/price"
             .httpGet(listOf("ingredients" to ingredients.map { it.name }.joinToString(separator = ",").toLowerCase()))
             .also { println("Requesting price for $ingredients.") }
-            .responseObject<List<MarketPrice>> { request, response, result ->
+            .responseObject<MarketPriceBatchedResponse> { request, response, result ->
                 when (result) {
                     is Result.Failure
                     -> {
@@ -54,7 +54,7 @@ class MarketPriceClient {
                         }
                     }
                     is Result.Success -> {
-                        val results = result.value
+                        val results = result.value.data
                         marketPrices = ingredients.map { it to (results.find { marketPrice -> marketPrice.name == it.name }?.price) }.toMap()
                         println("Market price for $ingredients: ${marketPrices.values}")
                     }
