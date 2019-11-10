@@ -2,12 +2,8 @@ graphql:
   servlet:
     mapping: /api/graphql
     enabled: true
-
-graphiql:
-  enabled: true
-  mapping: /graphiql
-  endpoint:
-    graphql: /api/graphql
-  cdn:
-    enabled: true
-    version: 0.12.0
+  playground:
+    mapping: /api/playground
+    endpoint: /api/graphql
+    cdn:
+      enabled: true
