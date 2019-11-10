@@ -27,9 +27,9 @@ We are making a food ordering app! Feel free to stray for this path, but the com
 1. Run the application
     - Node: yarn start
     - Java/Kotlin: ./gradlew bootRun
-1. Navigate to GraphiQL
+1. Navigate to Playground
     - Node: http://localhost:4000/
-    - Java/Kotlin: http://localhost:8080/graphiql
+    - Java/Kotlin: http://localhost:8080/api/playground
 1. Observe the response from the following query: 
 ``` 
 query { 
@@ -39,7 +39,7 @@ query {
 }
 ```
 
-## 2. Explore the API through graphiql
+## 2. Explore the API through playground
 1. Use the query navigator to identify the fields that can be added to the query
 1. Add the fields and explore the result
 1. Navigate to https://node.gql.systek.dev/, this is complete and working example of the api we are going to build. We will use this as a reference point in the remanider of the workshop.
