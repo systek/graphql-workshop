@@ -26,10 +26,8 @@ repositories {
 }
 
 dependencies {
-	compile 'com.github.kittinunf.fuel:fuel:2.2.1'
-	compile 'com.github.kittinunf.fuel:fuel-kotlinx-serialization:2.2.1'
-    compile 'org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0'
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
 	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:5.10.0'

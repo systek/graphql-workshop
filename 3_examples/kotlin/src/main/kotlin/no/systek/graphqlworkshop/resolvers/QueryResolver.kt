@@ -1,7 +1,7 @@
 package no.systek.graphqlworkshop.resolvers
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
-import kotlinx.serialization.ImplicitReflectionSerializer
+import kotlinx.coroutines.runBlocking
 import no.systek.graphqlworkshop.clients.MarketPriceClient
 import no.systek.graphqlworkshop.storage.DataSource
 import no.systek.graphqlworkshop.storage.Dish
@@ -17,18 +17,17 @@ class QueryResolver(
     private val dataSource: DataSource,
     private val marketPriceClient: MarketPriceClient
 ) : GraphQLQueryResolver {
-    fun dishes(): Collection<Dish> = dataSource.dishes
+    suspend fun dishes(): Collection<Dish> = dataSource.dishes
 
-    fun dish(dishId: Long): Dish = dataSource.getDish(dishId)
+    suspend fun dish(dishId: Long): Dish = dataSource.getDish(dishId)
 
-    fun orders(): Collection<Order> = dataSource.orders
+    suspend fun orders(): Collection<Order> = dataSource.orders
 
-    @ImplicitReflectionSerializer
-    fun ingredients(orderBy: OrderIngredientsBy?): List<Ingredient> =
+    suspend fun ingredients(orderBy: OrderIngredientsBy?): List<Ingredient> =
         when (orderBy) {
             NAME -> dataSource.ingredients.sortedBy { it.name }
             PRICE -> dataSource.ingredients
-                .sortedBy { marketPriceClient.getMarketPrice(it.name).price }
+                .sortedBy { runBlocking { marketPriceClient.getMarketPrice(it.name).price } }
             else -> dataSource.ingredients.toList()
         }
 }
