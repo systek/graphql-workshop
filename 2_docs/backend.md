@@ -6,7 +6,7 @@ Let's learn how to build a GraphQL API!
 We will be using [graphql-java-kickstart](https://github.com/graphql-java-kickstart) for both the java and kotlin implementation and [apollo-server](https://www.apollographql.com/docs/apollo-server/) for the node example.
 
 In the workshop you will touch on:
-1. Graphiql - An in-browser IDE for exploring GraphQL
+1. Playground - An in-browser IDE for exploring GraphQL
 1. QueryResolver - Root queries for your application
 1. Resolver - Field resolver
 1. Integrating with an external REST API - [Marked price of food items](https://market.gql.systek.dev/) 
