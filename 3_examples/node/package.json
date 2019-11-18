@@ -8,15 +8,15 @@
     "start:dev": "nodemon -e js,graphql src/index.js"
   },
   "dependencies": {
-    "apollo-link": "^1.2.11",
-    "apollo-link-http": "^1.5.14",
-    "apollo-server": "^2.4.8",
-    "graphql": "^14.1.1",
+    "apollo-link": "^1.2.13",
+    "apollo-link-http": "^1.5.16",
+    "apollo-server": "^2.9.9",
+    "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
-    "mongoose": "^5.5.11",
-    "node-fetch": "^2.3.0"
+    "mongoose": "^5.7.11",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.19.4"
   }
 }
