@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 
 import { ORDERS } from '../../apollo/queries'
 import Card from '../shared/card/Card'
@@ -35,30 +35,36 @@ const Orders = ({ title, orders, collapsedByDefault }) => {
   )
 }
 
-const OrderList = () => (
+const OrderList = () => {
+  const { error, loading, data } = useQuery(ORDERS)
+
+  console.log("Mornin")
+
+  if (error) return <Error error={error} />
+  if (loading) return <Spinner fullscreen />
+
+  const undelivered = data.orders.filter(order => order.delivered == null)
+  const delivered = data.orders.filter(order => order.delivered != null)
+
+  console.log(undelivered, delivered)
+
+  return (
+    <>
+      <Orders title="Undelivered" orders={undelivered} />
+      <Orders
+        title="Finished deliveries"
+        orders={delivered}
+        collapsedByDefault
+      />
+    </>
+  )
+}
+
+const OrderListSection = () => (
   <Card className={css.orderListContainer}>
     <h2>Deliveries</h2>
-    <Query query={ORDERS} notifyOnNetworkStatusChange>
-      {({ loading, error, data }) => {
-        if (error) return <Error error={error} />
-        if (loading) return <Spinner fullscreen />
-
-        const undelivered = data.orders.filter(order => order.delivered == null)
-        const delivered = data.orders.filter(order => order.delivered != null)
-
-        return (
-          <>
-            <Orders title="Undelivered" orders={undelivered} />
-            <Orders
-              title="Finished deliveries"
-              orders={delivered}
-              collapsedByDefault
-            />
-          </>
-        )
-      }}
-    </Query>
+    <OrderList />
   </Card>
 )
 
-export default OrderList
+export default OrderListSection

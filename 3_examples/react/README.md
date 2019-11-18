@@ -1,6 +1,6 @@
 # react example
 
-This starter uses:
+This example uses:
 
 - create-react-app for simple React config
 - apollo-boost for simple apollo setup

@@ -5,13 +5,14 @@ const uri =
 
 const cache = new InMemoryCache({
   dataIdFromObject: o => o.id,
+  freezeResults: true
 })
-
-console.log(uri)
 
 const client = new ApolloClient({
   // For dev with node example running on localhost:4000
   uri,
+  // For use during workshop
+  //uri: 'https://node.gql.systek.dev',
   cache,
 })
 
