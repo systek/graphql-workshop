@@ -10,8 +10,8 @@ const exampleData = [
     title: "Software Architech"
   },
   {
-    name: "Ole",
-    title: ".NET Developer"
+    name: "Mikael",
+    title: "Typer of Code"
   }
 ];
 
