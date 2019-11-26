@@ -22,6 +22,6 @@ Get workshopping!
 
 Other resources:
 
-- Presentation: https://nt.gql.systek.dev
+- Presentation: https://2019.gql.systek.dev/
 - GraphQL Playground of completed Node example: https://node.gql.systek.dev/
 - Completed React example, uses node backend: https://react.gql.systek.dev/
