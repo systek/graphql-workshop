@@ -42,7 +42,7 @@ query {
 ## 2. Explore the API through playground
 1. Use the query navigator to identify the fields that can be added to the query
 1. Add the fields and explore the result
-1. Navigate to https://node.gql.systek.dev/, this is complete and working example of the api we are going to build. We will use this as a reference point in the remanider of the workshop.
+1. Navigate to https://node.gql.systek.dev/, this is complete and working example of the api we are going to build. We will use this as a reference point in the remainder of the workshop.
 
 
 ## 3. Build your schema
@@ -63,7 +63,7 @@ query {
   }
 }
 ```
-1. Add a Ingredient tyge to your schema
+1. Add a Ingredient type to your schema
     - id: number - unique id
     - name: String
 1. Add a Dish type in your schema
@@ -156,7 +156,7 @@ mutation {
 ### Back to queries: List all ingredients, supply a way to sort through params!
 
 1. Create a query called `ingredients`, with no params. It should just return a list of all ingredients in the database.
-1. Create a enum type, add it as an optional parameter to `ingerdients`. When passed in you can sort the result differently. Make sure you parse the enum correcly.
+1. Create a enum type, add it as an optional parameter to `ingredients`. When passed in you can sort the result differently. Make sure you parse the enum correctly.
     - NAME: sort by name
     - PRICE: sort by price
     
@@ -168,7 +168,7 @@ Create a `marketPrice` of type float on your `Ingredient`-object. Look at the re
 
 Next, create a `allergens` of which can be a list of strings. Create a HTTP client that communicates with this external GraphQL API.
 
-Extra corricular activity: Find a library that is a GraphQL client for your platform, is it easier to use? Better? REST 4 lyfe?
+Extra curricular activity: Find a library that is a GraphQL client for your platform, is it easier to use? Better? REST 4 lyfe?
 
 ## 5. Summary
 ### Objects
@@ -177,7 +177,7 @@ There are four main domain objects, `Dish`, `Ingredient`, `Order` and `Receipt`.
 
 #### `Receipt`
 
-A receipt has an orderId which is a unqiue string, a delivery which is a timestamp (represented a a ISO-8601 formatted). It also resolves a list of `Ingredient` based on it's own orderId.
+A receipt has an orderId which is a unique string, a delivery which is a timestamp (represented a a ISO-8601 formatted). It also resolves a list of `Ingredient` based on it's own orderId.
 
 #### `Order`
 
@@ -189,7 +189,7 @@ Dish has an integer ID, a name, a price. It should also be extended to resolve a
 
 #### `Ingredient`
 
-Ingredient has an integer ID and a name. It shall also be extended to have two externally resolveable variables. "Market price" and "allergens" (which is a list). The shape of these objects you can chose your self, based on what the API provides.
+Ingredient has an integer ID and a name. It shall also be extended to have two externally resolvable variables. "Market price" and "allergens" (which is a list). The shape of these objects you can chose your self, based on what the API provides.
 
 ## End
 

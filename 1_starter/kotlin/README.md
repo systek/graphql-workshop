@@ -3,7 +3,7 @@
 This starter uses:
 
 - Spring Boot as application server
-- graphql-spring-boot-starter and graphiql-spring-boot-starter for automatic configuration of graphql runtime
+- graphql-spring-boot-starter and playground-spring-boot-starter for automatic configuration of graphql runtime
 - graphql-java-tools for schema first development
 
 ## Points of interest

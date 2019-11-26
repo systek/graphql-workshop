@@ -7,7 +7,7 @@ class PersonRepository {
     private val exampleData = listOf(
         Person("Karl", "Frontend Developer"),
         Person("Aage", "Software Architect"),
-        Person("Ole", ".NET Developer")
+        Person("Mikael", "Typer of Code")
     )
 
     fun getAll() = exampleData
