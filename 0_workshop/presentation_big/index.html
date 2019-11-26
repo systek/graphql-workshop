@@ -74,7 +74,7 @@
 <div class="reveal">
     <div class="slides">
         <section
-            data-background-video="http://mazwai.com/system/posts/videos/000/000/005/original/marc_lorenz--sky_cloudy_time-lapse.mp4"
+            data-background-video="intro.mp4"
             data-background-video-loop="true"
             data-background-video-muted="true"
             data-transition="slide-in slide-out"
@@ -163,8 +163,8 @@
                 query {
                   employee(navn: "karl") {
                     employeeOfTheMonth
-                    pay {
-                      yearly
+                    address {
+                      postcode
                     }
                   }
                 }
@@ -175,8 +175,8 @@
                   "data": {
                     "employee": {
                       "employeeOfTheMonth": false,
-                      "pay": {
-                        "yearly": 50
+                      "address": {
+                        "postcode": "0158"
                       }
                     }
                   }
@@ -191,13 +191,13 @@
                   query {
                     employee(name: "karl") {
                       name
-                      pay { yearly } // <--- Asks for pay
+                      address { postcode } // <--- Asks for address
                     }
                   }
                 </code>
               </pre>
               <ul>
-                <li class="fragment fade-in">Given an employee, the pay property is resolved</li>
+                <li class="fragment fade-in">Given an employee, the address property is resolved</li>
                 <li class="fragment fade-in">Pay is only fetched when the client asks for it</li>
                 <li class="fragment fade-in">Object relations can be complex and circular, GraphQL will resolve until all values are "Scalars"</li>
               </ul>
@@ -261,13 +261,13 @@
             <section>
               <p>Improves your dev experience</p>
               <ul>
-              <li class="fragment fade-in">Quick and easy to get started</li>
-              <li class="fragment fade-in">Removes a lot of the responsibilty from Redux</li>
-              <li class="fragment fade-in">Automatic state updates without complex reducers</li>
-              <li class="fragment fade-in">Familiar if you have used HoCs (redux' connect, react-router's withRouter)</li>
+                <li class="fragment fade-in">Quick and easy to get started</li>
+                <li class="fragment fade-in">Removes a lot of the responsibilty from Redux</li>
+                <li class="fragment fade-in">Automatic state updates without complex reducers</li>
+                <li class="fragment fade-in">Easy to use hooks API</li>
                 <ul>
-                  <li class="fragment fade-in">Also supports "function as children"-pattern</li>
-                  <li class="fragment fade-in">Hooks around the corner</li>
+                  <li class="fragment fade-in">Supports "function as children" component pattern</li>
+                  <li class="fragment fade-in">Supports Higher order components</li>
                 </ul>
               </ul>
             </section>
@@ -276,30 +276,35 @@
                 ```javascript
                 // EmployeeList: Normal component
 
-                export default graphql(gql`
-                  query allEmployees {
-                    employees {
-                      id
-                      name
-                      employeeOfTheMonth
+                const Example = () => {
+                  const result = useQuery(gql`
+                    query allEmployees {
+                      employees {
+                        name
+                        isGoodPresenter
+                      }
                     }
-                  }
-                `)(EmployeeList);
+                  `)
+                  ...
+                }
                 ```
                 ```javascript
-                // props:
+                // result:
 
                 {
+                  loading: false,
                   data: {
-                    loading: false,
                     employees: [
-                      { name: "karl", employeeOfTheMonth: false },
+                      { 
+                        name: "karl", 
+                        isGoodPresenter: false
+                       },
                       ...
                     ],
-                    error: null,
-                    refetch() { ... },
-                    ... // a lot more
-                  }
+                  },
+                  error: null,
+                  refetch() { ... },
+                  ... // a lot more
                 }
                 ```
             </section>
@@ -318,7 +323,7 @@
             <section data-markdown>
                 ##### Manual updating of state
 
-                Objects that are not recognised in the cache can be updated with either
+                Objects that are not recognised in the cache (e.g. new objects) can be updated with either
 
                 - `refetchQueries`: Be lazy and tell Apollo to get another query again.
                 - `update`: A function that allows you to read and write to the Apollo-cache.
@@ -328,273 +333,9 @@
                 - https://react.gql.systek.dev
             </section>
         </section>
-        <section data-transition="slide-in slide-out">
-          <h1>Dataloaders</h1>
-          <h2>N + 1</h2>
-            <section data-transition="slide-in">
-                <p class="fragment fade-in">
-                    N + 1 is a general term used in ORM to describe a situation where loading a single object graph takes N + 1 SQL queries
-                </p>
-            </section>
-        </section>
-        <section>
-            <h2>N + 1 & GraphQL</h2>
-            <section data-transition="slide-in">
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          root {
-                            ...
-                            child {
-                              ...
-                              grandChild {
-                                ...
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          root { <= fetch
-                            ...
-                            child {
-                              ...
-                              grandChild {
-                                ...
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-                <img style="max-width: 50%; float: right;" src="lib/img/q-1.png"  alt="root"/>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          root { # 1
-                            ...
-                            child { <= fetch
-                              ...
-                              grandChild {
-                                ...
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-                <img style="max-width: 50%; float: right;" src="lib/img/q-2.png"  alt="root"/>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          root { # 1
-                            ...
-                            child { <= fetch
-                              ...
-                              grandChild {
-                                ...
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-                <img style="max-width: 50%; float: right;" src="lib/img/q-3.png"  alt="root"/>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          root { # 1
-                            ...
-                            child { # 2
-                              ...
-                              grandChild { <= fetch
-                                ...
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-                <img style="max-width: 50%; float: right;" src="lib/img/q-4.png"  alt="root"/>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          root { # 1
-                            ...
-                            child { # 2
-                              ...
-                              grandChild { <= fetch
-                                ...
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-                <img style="max-width: 50%; float: right;" src="lib/img/q-5.png"  alt="root"/>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          root { # 1
-                            ...
-                            child { # 2
-                              ...
-                              grandChild { <= fetch
-                                ...
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-                <img style="max-width: 50%; float: right;" src="lib/img/q-6.png"  alt="root"/>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          root { # 1
-                            ...
-                            child { # 2
-                              ...
-                              grandChild { # 4
-                                ...
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-                <img style="max-width: 50%; float: right;" src="lib/img/q-7.png"  alt="root"/>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          shops {
-                            id
-                            name
-                            customers {
-                              id
-                              name
-                              purchases {
-                                id
-                                amount
-                                game
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          shops {  # 2260
-                            id
-                            name
-                            customers {
-                              id
-                              name
-                              purchases {
-                                id
-                                amount
-                                game
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          shops {  # 2260
-                            id
-                            name
-                            customers {  # 100
-                              id
-                              name
-                              purchases {
-                                id
-                                amount
-                                game
-                              }
-                            }
-                          }
-                        }
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <pre style="box-shadow: none; width: 35%; float: left;" >
-                    <code data-trim data-noescap>
-                        query {
-                          shops {  # 2260
-                            id
-                            name
-                            customers {  # 100
-                              id
-                              name
-                              purchases {
-                                id
-                                amount
-                                game
-                              }
-                            }
-                          }
-                        }  # 228 261 data fetches
-                    </code>
-                </pre>
-                <div style="width: 60%; float: right;">
-                    <ul>
-                        <li class="fragment fade-in">Sequencial execution
-                            <ul>
-                                <li class="fragment fade-in">Bottleneck at datasource</li>
-                            </ul>
-                        </li>
-                        <li class="fragment fade-in">Async execution
-                            <ul>
-                                <li class="fragment fade-in">Scales with hardware</li>
-                                <li class="fragment fade-in">Bottleneck at datasource</li>
-                            </ul>
-                        </li>
-                        <li class="fragment fade-in">Async w/DataLoader
-                            <ul>
-                                <li class="fragment fade-in">3 calls w/batching</li>
-                                <li class="fragment fade-in">Caching</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </section>
-        <section data-transition="slide-in">
-            <h2>DataLoader - batching & caching</h2>
-            <img src="lib/img/graphql-dataloader.svg" alt="dataloader" >
-        </section>
         <section
             data-markdown
-            data-background-video="http://mazwai.com/system/posts/videos/000/000/105/original/fotogen--clouds_over_the_mountain.mp4"
+            data-background-video="end.mp4"
             data-background-video-loop="true"
             data-background-video-muted="true"
         >
