@@ -21,7 +21,8 @@ In the `1_starter/react` folder, run `yarn` to install dependencies and run `yar
 
 Verify that everything looks fine, and that the example query loads the data as expected.
 
-Developing against the deployed example won't be the best experience as other people might add and remove data at any time. We would like to use a local node example as a development backend instead. The `apollo.js` file is where the URL the Apollo client uses is configured, change it to just `/`.
+Developing against the deployed example won't be the best experience as other people might add and remove data at any time. We would like to use a local node example as a development backend instead. The `src/apollo/client.js` file is where the URL the Apollo client uses is configured.
+Change the `uri` property to `/`.
 
 ```diff
 const client = new ApolloClient({
