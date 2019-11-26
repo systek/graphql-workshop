@@ -21,7 +21,8 @@ In the `1_starter/react` folder, run `yarn` to install dependencies and run `yar
 
 Verify that everything looks fine, and that the example query loads the data as expected.
 
-Developing against the deployed example won't be the best experience as other people might add and remove data at any time. We would like to use a local node example as a development backend instead. The `src/apollo/client.js` file is where the URL the Apollo client uses is configured.
+Developing against the deployed example won't be the best experience as other people might add and remove data at any time. We would like to use a local node example as a development backend instead.
+ The `1_starter/react/src/apollo/client.js` file is where the URL the Apolo client uses is configured.
 Change the `uri` property to `/`.
 
 ```diff
@@ -41,13 +42,15 @@ _Before continuing you might want to familiarise your self with the folder struc
 
 [Apollo docs: Queries](https://www.apollographql.com/docs/react/essentials/queries)
 
-In GraphQL, fetching data (without changing it) is called queries. With Apollo fetching data is done using a `<Query />` component. This component expects a `query` prop which is a GraphQL query.
+In GraphQL, fetching data (without changing it) is called queries. 
+With Apollo, fetching data is done with the `useQuery` hook. The hook takes two parameters: A GraphQL query, and some optional options
 
 **Optional: Familiarize your self with GraphQL queries!**
 
-Visit the node backends _GraphQL Playground_, (http://localhost:4000/) it is a small built in web app to explore a GraphQL schema. It has auto complete and a query formatter.
+Visit the node backends _GraphQL Playground_, (http://localhost:4000/) it is a small built-in web app to explore a GraphQL schema. 
+It has auto completion and a query formatter.
 
-Try pasting in this query and hitting play:
+Try pasting this query and hitting play:
 
 ```graphql
 {
