@@ -2,7 +2,7 @@
   "dependencies": {
     "apollo-server": "^2.4.8",
     "graphql": "^14.2.1",
-    "mongoose": "^5.4.22"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "prettier": "^1.16.4"
