@@ -5,6 +5,8 @@ This starter uses:
 - create-react-app for simple React config
 - apollo-boost for simple apollo setup
 
+#### [Follow these docs during the workshop](/2_docs/frontend.md)
+
 ## Points of interest
 
 - [apollo/client.js](/1_starter/react/src/apollo/client.js)

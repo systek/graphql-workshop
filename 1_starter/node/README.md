@@ -7,3 +7,5 @@ This starter uses:
 - nodemon for hot-reloading
 
 Entire starter is defined in index.js.
+
+#### [Follow these docs during the workshop](/2_docs/backend.md)
