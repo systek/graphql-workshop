@@ -111,14 +111,15 @@ query {
 }
 ```
 
-1. Add a Order definition to your schema
-    - id: number - unique id
+1. Add a `Receipt` definition to your schema
+    - id: number
     - delivery: String - date/time of expected delivery
     - delivered: nullable String - date/time of delivery
-    - items: collection of Dish items
-1. Store orders in your system.
+    - items: collection of `Dish` items
+1. Add a orders query to your schema that takes no parameters and returns a list of `Receipt`'s
+1. Store receipts in your system.
 1. Upgrade the fake datasource to contain these, or steal the one from the example projects if you want. 
-1. This query should take no params and return all receipts in the system.
+1. This query should return all receipts in the system.
 
 ### Mutation: Place an order, one or many
 
@@ -140,26 +141,14 @@ mutation {
 }
 ```
 
-1. Add a `NewOrder` definition to your schema
+1. Add a `Order` definition to your schema
     - dishId: number
     - quantity: number
-1. Add a `Receipt` definition to your schema
-    - id: number
-    - delivery: String - date/time of expected delivery
-    - delivered: nullable String - date/time of delivery
-    - items: collection of `Dish` items
-1. Create a mutation, call it `order`, receive an array of `NewOrder` items.
+1. Create a mutation, call it `order`, receive an array of `Order` items.
 1. Create a mutation resolver for the new mutation
 1. Store the order in the system (you might need to extend your datasource).
 1. Return a `Receipt` to the user.
 
-### Back to queries: List all ingredients, supply a way to sort through params!
-
-1. Create a query called `ingredients`, with no params. It should just return a list of all ingredients in the database.
-1. Create a enum type, add it as an optional parameter to `ingredients`. When passed in you can sort the result differently. Make sure you parse the enum correctly.
-    - NAME: sort by name
-    - PRICE: sort by price
-    
 ## 4. External integrations!
 
 You now probably have all your domain objects, let us extend them with some object-resolvers, and talk to some external APIs.
@@ -170,6 +159,13 @@ Next, create a `allergens` of which can be a list of strings. Create a HTTP clie
 
 Extra curricular activity: Find a library that is a GraphQL client for your platform, is it easier to use? Better? REST 4 lyfe?
 
+### Back to queries: List all ingredients, supply a way to sort through params!
+
+1. Create a query called `ingredients`, with no params. It should just return a list of all ingredients in the database.
+1. Create a enum type, add it as an optional parameter to `ingredients`. When passed in you can sort the result differently. Make sure you parse the enum correctly.
+    - NAME: sort by name
+    - PRICE: sort by price
+    
 ## 5. Summary
 ### Objects
 
