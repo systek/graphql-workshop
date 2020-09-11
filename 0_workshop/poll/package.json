@@ -8,6 +8,6 @@
   "dependencies": {
     "lodash.groupby": "^4.6.0",
     "mongoose": "^5.7.5",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.6.1"
   }
 }
